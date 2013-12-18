@@ -1,0 +1,33 @@
+<div id="mobile">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <div class="login">
+            <a id="facebook-button" class="btn">
+              <i class="fa fa-facebook"></i>
+              Sign up with
+              <strong>Facebook</strong>
+            </a>
+            <%= form_for(:session, url:sessions_path, :html => {:role => 'form', :id => 'login-form'}) do |f| %>
+                <div class="form-group">
+                  <label class="control-label" for="email">E-mail adres</label>
+                  <%= f.text_field :email, :class => 'form-control', :id => 'email', :placeholder => 'E-mailadres'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="wachtwoord">wachtwoord</label>
+                  <%= f.password_field :password, :class => 'form-control', :id => 'wachtwoord', :placeholder => 'Wachtwoord'; %>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <%= f.check_box :remember_me; %>
+                    Onthoud mij
+                  </label>
+                </div>
+                <button type="submit" class="btn" id="login-button">Login</button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+

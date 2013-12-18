@@ -1,0 +1,56 @@
+<div class="chatbox">
+  <div class="chat-header">
+    <h4><%= @to_user.firstname+" "+@to_user.lastname;%></h4>
+  </div>
+  <div class="chatfeed">
+    <div class="messages">
+        <% @messages.each do|message| %>
+            <% if(message.sender.id == current_user.id) %>
+                <div class="message sender">
+            <% else %>
+                <div class="message receiver">
+            <% end %>
+                <div class="header clearfix">
+                    <span class="name pull-left">
+                        <%= message.sender.firstname+" "+message.sender.lastname; %>
+                    </span>
+                    <span class="date pull-right">
+                        <%= message.created_at.to_s; %>
+                    </span>
+                </div>
+                <div class="body">
+                  <%= message.body; %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+  </div>
+  <div class="chatbar">
+    <input type="text" class="form-control" id="chat" name="chat" />
+  </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".chatfeed").animate({
+            scrollTop: $(".messages").height()
+        },250);
+        $(".chatbar #chat").keypress(function(event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                var body = $(this).val();
+                $.ajax({
+                    data:{body:body,to_user:'<%= @to_user.id;%>'},
+                    url: '<%= new_chat_url %>',
+                    type: "POST",
+                    success: function(data){
+                        $(".messages").append("<div class='message sender'><div class='header clearfix'><span class='name pull-left'>"+data.sender.firstname+" "+data.sender.lastname+"</span><span class='date pull-right'>"+data.message.created_at+"</span></div><div class='body'>"+data.message.body+"</div></div>");
+                        $(".chatfeed").animate({
+                           scrollTop: $(".messages").height()
+                        },250);
+                        $(".chatbar #chat").val('');
+                    }
+                });
+            }
+        });
+    });
+</script>ta.sender.l

@@ -1,0 +1,41 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+#header{
+  height: 100%;
+  background: image-url('head.png');
+  background-size: 100%;
+}
+#login-wrap{
+  background: rgba(255,255,255,0.4);
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  padding:20px;
+  margin-top:80px;
+  font-family: helvetica;
+}
+
+#facebook-button{
+  background: #3b5b97;
+  color: #ffffff;
+  padding: 10px;
+  display:block;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+#login-button{
+  background: #973b3b;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display:block;
+  width: 100%;
+  color: #ffffff;
+  border:none;
+}

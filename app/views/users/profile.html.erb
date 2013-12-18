@@ -1,0 +1,71 @@
+<div class="container">
+  <div style="height: 40px;"></div>
+  <h1>Mijn huis</h1>
+
+  <div class="panel panel-primary col-xs-6" style="margin-right: 15px; padding: 0px;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Huize <%= @user.lastname %></h3>
+    </div>
+    <div class="panel-body">
+        <p>Naam: <%= "#{@user.firstname} #{@user.lastname}" %></p>
+        <p>Plaats: <%= @user.place %></p>
+        <p>Adres: <%= @user.adres %></p>
+        <p>Postcode: <%= @user.zipcode %></p>
+        <p>Telefoon: <%= @user.phone %></p>
+        <p>Mobiel: <%= @user.mobile_phone %></p>
+    </div>
+  </div>
+
+  <div class="panel panel-primary col-xs-6" style="width: 48%; padding: 0px;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Locatie</h3>
+    </div>
+    <div class="panel-body">
+      <div style="height: 500px; margin: 0px; padding: 0px" id="map-canvas"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    var map,
+        marker;
+
+    function setCurrentLocation() {
+        addLocation(<%= @user.latitude.to_s %>, <%= @user.longitude.to_s %>);
+    }
+
+    function initialize() {
+        var mapOptions = {
+            zoom: 17,
+            center: new google.maps.LatLng(<%= @user.latitude.to_s+","+@user.longitude.to_s; %>),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
+
+    function addLocation(lat, long) {
+        var users_marker = new google.maps.MarkerImage('<%=image_url('icons/user.png');%>');
+
+        marker = new google.maps.Marker({
+            map: map,
+            position: new google.maps.LatLng(lat, long),
+            title: '<%= @user.firstname + " " + @user.lastname; %>',
+            icon: users_marker
+        });
+
+        return marker;
+    }
+
+    $(document).ready(function() {
+        setTimeout(function() {
+            initialize();
+        }, 500);
+
+        setTimeout(function() {
+            setCurrentLocation();
+        }, 1000);
+    });
+</script>

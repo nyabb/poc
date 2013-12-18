@@ -1,0 +1,53 @@
+// Place all the styles related to the Chats controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.chatbox{
+  width:400px;
+  margin: 200px auto;
+  border: 1px solid #d3d3d3;
+  background: #d4e3e6;
+  .chat-header{
+    background: #abb8bb;
+    height:40px;
+    border-bottom: 1px solid #eaedf2;
+    h4{
+      margin:0;
+      padding:0;
+      line-height:40px;
+      color: #ffffff;
+      margin-left:10px;
+    }
+  }
+}
+.chatfeed{
+  height:250px;
+  max-height:250px;
+  overflow:auto;
+  .message{
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #ffffff;
+    padding: 15px;
+    margin: 10px 10px 20px 10px;
+    -moz-box-shadow: 0px 1px 3px #b5b5b5;
+    -webkit-box-shadow: 0px 1px 3px #b5b5b5;
+    box-shadow: 0px 1px 3px #b5b5b5;
+    .header{
+      border-bottom: 1px solid #eaedf2;
+      .name{
+        color: #4cbfd2;
+        font-weight:600;
+      }
+      .date{
+        color: #4cbfd2;
+      }
+    }
+  }
+}
+.chatbar{
+  padding:10px;
+  border-top: 1px solid #d3d3d3;
+}

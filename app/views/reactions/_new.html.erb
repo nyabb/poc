@@ -1,0 +1,58 @@
+<div class="well well-small" style="text-align:left">
+  <h4>Reageren</h4>
+
+  <form action="
+    <% reaction_create_path %>">
+    <%= hidden_field_tag :react_type, react_type; %>
+    <%= hidden_field_tag :react_to, react_to; %>
+
+    <div class="row-fluid">
+
+      <%= text_area_tag 'message', nil, class: 'form-control input-xxlarge', id: 'react_message'; %>
+
+    </div>
+    <div class="row-fluid">
+
+      <%= button_tag "Reactie plaatsen", :class => "answer_reaction btn btn-info" %>
+
+    </div>
+  </form>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $(document).on('click', ".answer_reaction", function () {
+
+            $(window).keydown(function (event) {
+                if (event.keyCode == 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+            var reaction_type, reaction_to, message;
+
+
+            reaction_type = $("#react_type").val();
+            reaction_to = $("#react_to").val();
+            message = $("#react_message").val();
+
+            $.ajax(
+                    {
+
+                        type: 'POST',
+                        url: "/reactions/create",
+                        data: {
+                            react_to: reaction_to,
+                            react_type: reaction_type,
+                            message: message
+                        },
+                        async: true,
+                        success: function (data) {
+
+                        }
+                    });
+        });
+    });
+</script>

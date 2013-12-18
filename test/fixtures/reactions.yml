@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  react_type: MyString
+  react_to: 1
+  message: MyString
+  userId: 1
+
+two:
+  react_type: MyString
+  react_to: 1
+  message: MyString
+  userId: 1

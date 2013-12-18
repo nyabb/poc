@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-12">
+      <h2 class="page-header" style="color: #FE5214">Ruilen
+        <small>aanbiedingen bij U inDeBuurt</small>
+      </h2>
+
+    </div>
+
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <form class="well form-inline" role="form" method="get" action="offers">
+        Vind een aanbod
+        <%= text_field_tag :search, params[:search], :id => "search_input_naam", :class => "form-control", :placeholder => "bijv. stofzuiger" %>
+        binnen
+        <%= link_to(user_location_url) do %>
+            Uw Locatie
+        <% end %>
+        <button type="submit" class="btn btn-warning" id="zoek_button">Zoeken</button>
+      </form>
+    </div>
+
+    <div class="row">
+      <% @offers.each do |offer| %>
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="panel panel-danger panel_va ">
+
+              <div class="panel-heading">
+                <h5><%= offer.title %></h5>
+              </div>
+              <div class="panel-body">
+
+                <% filename = "offers/#{offer.id}." %>
+                <% file_root = "public/images/" %>
+                <% if File.exist?(file_root + filename + "png") %>
+                    <%= link_to image_tag(filename + "png", :style => 'width: 100%; min-height:200px;', :class => "thumbnail"), offer %>
+                <% end %>
+                <% if File.exist?(file_root + filename + "jpeg") %>
+                    <%= link_to image_tag(filename + "jpeg", :style => 'width: 100%; min-height:200px;', :class => "thumbnail"), offer %>
+                <% end %>
+                <% if File.exist?(file_root + filename + "jpg") %>
+                    <%= link_to image_tag(filename + "jpg", :style => 'width: 100%; min-height:200px;', :class => "thumbnail"), offer %>
+                <% end %>
+
+                <p><%= offer.message %></p>
+
+
+                <div class="btn-group btn-group-ms">
+                  <%= link_to(offer, html_options = {:role => "button", :class => "btn btn-default", :type => "button"}) do %>
+                      <i class="fa fa-envelope-o"></i>
+                  <% end %>
+                  <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-android"></i></a>
+                  <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-twitter"></i></a>
+                  <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-facebook"></i></a>
+                  <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-instagram"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <ul class="media-list">
+      <li class="media well well-small">
+        <h4>Bied iets aan.</h4>
+        <p>
+          <%= render partial: "new", :locals => {:offer => @offer} %>
+        </p>
+      </li>
+      <li>
+        <h5>Testiomonials</h5>
+      </li>
+      <li class="media well well-small">
+        <a class="pull-left" href="#">
+          <%= image_tag "logo.png", :class => "media-object", :alt => "bootstrap business template" %>
+        </a>
+
+        <div class="media-body">
+          Cras sit amet nibh libero metus
+          Cras sit amet nibh ...
+          <small> November 15 2012</small>
+          <a class="pull-right" href="#"><strong>Kim</strong></a>
+        </div>
+      </li>
+
+
+    </ul>
+
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.scss.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.widget.register-widget{
+  font-family: 'Helvetica Neue','Helvetica','Arial',Arial,sans-serif;
+}
+
+
+.datepicker.dropdown-menu{
+  font-family: 'Helvetica Neue','Helvetica','Arial',Arial,sans-serif;
+  padding:5px;
+  table{
+    thead{
+      th{
+        text-align:center;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        &:hover{
+          cursor:pointer;
+          background: #eaeaea;
+        }
+      }
+    }
+    tbody{
+      .month,.year{
+        margin: 0 5px;
+        padding: 4px 5px;
+        &:first-of-type{
+          margin-left:0px;
+        }
+        &:last-of-type{
+          margin-right:0px;
+        }
+      }
+      .day,.month,.year{
+        text-align:center;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        &:hover{
+          cursor:pointer;
+          background: #eaeaea;
+        }
+        &.active{
+          background: #5bc0de;
+          color: #ffffff;
+        }
+      }
+
+    }
+  }
+}

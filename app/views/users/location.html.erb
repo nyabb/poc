@@ -1,0 +1,89 @@
+<div class="container">
+    <div style="height: 40px;"></div>
+    <div style="margin-left: 20px;">
+        <h1>Selecteer jouw locatie</h1>
+        <p>Door je locatie en radius in te stellen krijg je alleen aanbiedingen binnen deze radius. Dit kan handig zijn als je geen aanbiedingen wil hebben buiten je radius.</p>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    var map,
+        circle;
+
+    function saveLocation() {
+        var data = {
+            latitude:   circle.center.nb,
+            longitude:  circle.center.ob,
+            radius:     circle.getRadius()
+        };
+
+        $.ajax(
+        {
+            type: 'POST',
+            url: "/settings/save_location/",
+            data: data,
+            async: true
+        });
+    }
+
+    function setCurrentLocation() {
+        $.ajax(
+        {
+            type: 'GET',
+            url: "/settings/current_location/",
+            async: true,
+            success: function(data)
+            {
+                addRadius(data.radius, data.latitude, data.longitude)
+            }
+        });
+    }
+
+    function addRadius(lat, long, radius) {
+        addCircle(lat, long, radius);
+    };
+
+    function initialize() {
+        var mapOptions = {
+            zoom: 17,
+            center: new google.maps.LatLng(<%= current_user.latitude.to_s + "," + current_user.longitude.to_s; %>),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
+
+    function addCircle(radius, lat, long) {
+        var circleData = {
+            map: map,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#000000',
+            fillOpacity: 0.1,
+            center: new google.maps.LatLng(lat, long),
+            radius: parseFloat(radius)
+        };
+
+        circle = new google.maps.Circle(circleData);
+
+        circle.setEditable(true);
+        circle.setDraggable(true);
+
+        google.maps.event.addListener(circle, 'radius_changed', saveLocation);
+        google.maps.event.addListener(circle, 'mouseup', saveLocation);
+    }
+
+    $(document).ready(function() {
+        setTimeout(function() {
+            initialize();
+        }, 500);
+
+        setTimeout(function() {
+            setCurrentLocation();
+        }, 1000);
+    });
+</script>
+<div style="height: 100%; margin: 0px; margin-bottom: -210px; padding: 0px" id="map-canvas"></div>

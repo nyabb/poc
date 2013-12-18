@@ -1,0 +1,5 @@
+<% unless mobile? %>
+    <%= render :partial => "sessions/new" %>
+<% else %>
+    <%= render :partial => "mobile/sessions/new" %>
+<% end %>

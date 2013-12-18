@@ -1,0 +1,37 @@
+<script type="text/javascript">
+    setId(<%= @current_user.received_messages.reverse[0].id %>);
+</script>
+
+<div style="margin-top: 40px;" class="container">
+  <h1>Ontvangen berichten</h1>
+
+  <div id="received-messages">
+<% @current_user.received_messages.reverse.each do |message| %>
+    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+      <div class="panel panel-danger panel_va ">
+
+        <div class="panel-heading">
+          <h5><%= message.sender.firstname %> stuurde op <%= message.created_at %></h5>
+        </div>
+        <div class="panel-body">
+          <p><%= message.body %></p>
+
+          <% if message.read %>
+              <div class="btn-group btn-group-ms">
+                <button class="btn btn-primary disabled" type="button" role="button">Verstuurd <i class="fa fa-check"></i></button>
+              </div>
+          <% else %>
+              <%= text_area_tag(message.id, '', :placeholder => 'Stuur wat terug!', :class => 'form-control') %>
+              <br />
+              <div class="btn-group btn-group-ms">
+                  <button data-receiver-id="<%= message.id %>" type="button" role="button" class="answer_message btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+<% end %>
+  </div>
+</div>

@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-lg-12">
+      <h2 class="page-header" style="color: #FE5214">Ruilen
+        <small>aanbiedingen bij U inDeBuurt</small>
+      </h2>
+
+    </div>
+
+  </div>
+  <p>Hieronder vind u alle informatie over dit bod.</p>
+
+  <div class="col-md-9">
+    <div class="row">
+
+
+      <div class="well well-small" style="text-align:left;">
+        <h3><%= "Aanbod: #{@offer.title}" %></h3>
+
+        <p class="meta">Aangeboden door
+          <a href="#" title="Posts by admin"><%= link_to @offer.user.firstname, user_profile_url(@offer.user) %></a> op
+          <a href="#"><%= @offer.created_at %></a>,
+        </p>
+
+        <p>
+          <% filename = "offers/#{@offer.id}." %>
+          <% file_root = "public/images/" %>
+          <% if File.exist?(file_root + filename + "png") %>
+              <%= image_tag(filename + "png", :style => 'width: 100%;') %>
+          <% end %>
+          <% if File.exist?(file_root + filename + "jpeg") %>
+              <%= image_tag(filename + "jpeg", :style => 'width: 100%;') %>
+          <% end %>
+          <% if File.exist?(file_root + filename + "jpg") %>
+              <%= image_tag(filename + "jpg", :style => 'width: 100%;') %>
+          <% end %>
+
+        </p>
+
+        <p>
+          <%= @offer.message %>
+        </p>
+
+        <br/>
+
+        <h3>Reacties
+          <small>(<%= @offer.reactions.count.to_s %>)</small>
+        </h3>
+        <% @offer.reactions.each do |reaction| %>
+
+            <div class="media">
+              <div class="well well-mini">
+                <a class="pull-left" href="#">
+                  <%= image_tag("logo.png", :class => "media-object") %>
+
+                </a>
+
+                <div class="media-body">
+                  <h6 class="media-heading"><%= reaction.user.firstname %></h6>
+
+                  <p class="list-group-item-text"><%= reaction.message %></p>
+
+                  <div class="btn-group-xs btn-group toolTipgroup">
+                    <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-android"></i></a>
+                    <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-twitter"></i></a>
+                    <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-facebook"></i></a>
+                    <a href="#" class="btn btn-default" type="button" role="button"><i class="fa fa-instagram"></i></a>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+        <% end %>
+
+      </div>
+
+
+      <%= render partial: "reactions/new", :locals => {:react_type => 'offers', :react_to => @offer.id} %>
+
+      <% if @user.present? && @user.id == @offer.user_id %>
+          <div class="btn-group-justified">
+            <%= button_to "aanbod verwijderen", delete_url, :class => " delete_button btn btn-danger btn-lg btn-block btn", :method => :get %>
+          </div>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="col-md-3">
+    <ul class="media-list">
+      <li class="media well well-small">
+        <h4>Bied iets aan.</h4>
+
+        <p>
+          <%= render partial: "new", :locals => {:offer => @offer} %>
+        </p>
+      </li>
+      <li>
+        <h5>Testiomonials</h5>
+      </li>
+      <li class="media well well-small">
+        <a class="pull-left" href="#">
+          <%= image_tag "logo.png", :class => "media-object", :alt => "bootstrap business template" %>
+        </a>
+
+        <div class="media-body">
+          Cras sit amet nibh libero metus
+          Cras sit amet nibh ...
+          <small> November 15 2012</small>
+          <a class="pull-right" href="#"><strong>Kim</strong></a>
+        </div>
+      </li>
+
+
+    </ul>
+
+  </div>
+</div>
+
+
+
+
+

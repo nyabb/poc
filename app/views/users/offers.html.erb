@@ -1,0 +1,120 @@
+<h1>Selecteer jouw locatie</h1>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    var map,
+        circle;
+
+
+    function initialize() {
+        var mapOptions = {
+            zoom: 20,
+            center: new google.maps.LatLng(51.985, 5.920),
+            mapTypeId: google.maps.MapTypeId.TERRAIN
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    }
+
+    function addCircle(radius, lat, long) {
+        var circleData = {
+            map: map,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#000000',
+            fillOpacity: 0.1,
+            center: new google.maps.LatLng(lat, long),
+            radius: parseFloat(radius)
+        };
+
+        var circle = new google.maps.Circle(circleData);
+
+        circle.setEditable(true);
+        circle.setDraggable(true);
+
+        return circle;
+    }
+
+    function addMarker(lat, long, prio, title, text, newMarker) {
+        var effect = google.maps.Animation.DROP;
+
+        if (newMarker == true) {
+            effect = google.maps.Animation.BOUNCE;
+        }
+
+        var style = 'text-indent: 5px; font-weight: bold;';
+        if (prio == 1) {
+            style = 'background-color: #ff0000; color: #FFFFFF; text-indent: 5px; font-weight: bold;';
+        } else if (prio == 2) {
+            style = 'background-color: #008000; color: #FFFFFF; text-indent: 5px; font-weight: bold;';
+        } else if (prio == 3) {
+            style = 'background-color: #FF4500; color: #FFFFFF; text-indent: 5px; font-weight: bold;';
+        }
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, long),
+            map: map,
+            animation: effect,
+            title: title
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker, 'click', (function (marker) {
+            var contentString = ''
+                    + '<div id="infoWindow-' + title + '">'
+                    + '<div id="bodyContent-' + title + '">'
+                    + '<p style="' + style + '">' + title + '<br></p>'
+                    + '<p>' + text + '</p>'
+                    + '</div>'
+                    + '</div>';
+
+            return function () {
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+                marker.setAnimation(null);
+            };
+        })(marker));
+
+        return marker;
+    }
+
+    function addMarkers(data, newItem) {
+        for (index = 0; index < data.length; ++index) {
+            addMarker(data[index].lat, data[index].lon, 1, data[index].title, data[index].message, newItem);
+        }
+    }
+
+    $.ajax(
+    {
+        type: 'GET',
+        url: "/aanbiedingen/reload/",
+        async: true,
+        success: function(data)
+        {
+            addMarkers(data, false);
+            reloadMarkers();
+        }
+    });
+
+    function reloadMarkers() {
+        $.ajax(
+        {
+            type: 'GET',
+            url: "/aanbiedingen/reload/",
+            async: true,
+            success: function(data)
+            {
+                addMarkers(data, true);
+            }
+        });
+
+        setTimeout(function() {
+            reloadMarkers();
+        }, 5000);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+    //addMarker(51.98679, 5.9310, 2, 'Jan houdt een BBQ!', 'Je bent uitgenodigd op de BBQ van Jan!', true);
+</script>
+<div style="height: 100%; margin: 0px; padding: 0px" id="map-canvas"></div>

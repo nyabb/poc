@@ -1,0 +1,36 @@
+<header id="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+            Test
+      </div>
+      <div class="col-md-6 col-md-offset-4">
+        <div class="clearfix">
+          <div class="pull-right">
+              <%= form_for(:session, url:sessions_path, :html => {:role => 'form',:id=>'login-form',:class => 'form-inline'}) do |f| %>
+                  <div class="form-group">
+                    <label class="sr-only" for="email">E-mail adres</label>
+                    <%= f.text_field :email, :class => 'form-control', :id => 'email', :placeholder => 'E-mailadres'; %>
+                  </div>
+                  <div class="form-group">
+                    <label class="sr-only" for="wachtwoord">wachtwoord</label>
+                    <%= f.password_field :password, :class => 'form-control', :id => 'wachtwoord', :placeholder => 'Wachtwoord'; %>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <%= f.check_box :remember_me, :class => 'form-control'; %>
+                      Onthoud mij
+                    </label>
+                  </div>
+                  <button type="submit" class="btn btn-default">Login</button>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+Redirect
+<% if flash[:alert] %>
+    <div class="notice"><%= flash[:alert] %></div>
+<% end %>

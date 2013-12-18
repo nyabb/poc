@@ -1,0 +1,165 @@
+<div style="height: 100%; margin-bottom: -51px;" id="map-canvas"></div>
+
+<div id="map-controls">
+  <div id="vertical-slider"></div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    var map;
+
+    function initialize() {
+        var mapOptions = {
+            zoom: 18,
+            center: new google.maps.LatLng(<%= @user.latitude.to_s+","+@user.longitude.to_s; %>),
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            disableDefaultUI: true
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        var users_marker = new google.maps.MarkerImage('<%=image_url('icons/user.png');%>');
+        var attention_marker = new google.maps.MarkerImage('<%=image_url('icons/attention.png');%>');
+        var arrows_marker = new google.maps.MarkerImage('<%=image_url('icons/arrow.png');%>');
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: map.getCenter(),
+            title: '<%= @user.firstname+" "+@user.lastname; %>',
+            icon: users_marker
+        });
+
+        var outerCircleData = {
+            map: map,
+            strokeColor: '#e5323f',
+            strokeOpacity: 0.9,
+            strokeWeight: 7,
+            fillOpacity: 0,
+            center: new google.maps.LatLng(<%= @user.latitude %>, <%=@user.longitude %>),
+            radius: parseFloat(<%= @user.radius; %>)
+        };
+//        var outerCircle = new google.maps.Circle(outerCircleData);
+
+        var innerCircleData = {
+            map: map,
+            strokeColor: '#FFFFFF',
+            strokeOpacity: 1,
+            strokeWeight: 6,
+            fillColor: '#e5323f',
+            fillOpacity: 0.25,
+            center: new google.maps.LatLng(<%= @user.latitude %>, <%=@user.longitude %>),
+            radius: parseFloat(<%= @user.radius; %>)
+        };
+//        var innerCircle = new google.maps.Circle(innerCircleData);
+
+        var styles = [
+            {
+                "featureType": "water",
+                "stylers": [
+                    { "color": "#a7d4ef" }
+                ]
+            },{
+                "featureType": "road.arterial",
+                "stylers": [
+                    { "visibility": "on" },
+                    { "color": "#b5d5fb" }
+                ]
+            },{
+                "featureType": "landscape.man_made",
+                "stylers": [
+                    { "color": "#f6f0df" }
+                ]
+            },{
+                "featureType": "road.highway",
+                "stylers": [
+                    { "color": "#fbd84e" }
+                ]
+            },{
+                "featureType": "poi.park",
+                "stylers": [
+                    { "color": "#a3cd6b" }
+                ]
+            }
+        ];
+
+        map.setOptions({styles: styles});
+
+        function addMarker(lat, long, prio, title, text, newMarker, img) {
+            var effect = google.maps.Animation.DROP;
+
+            var image = new google.maps.MarkerImage(
+                    '/assets/' + img ,
+                    new google.maps.Size(54, 54),
+                    new google.maps.Point(0, 0),
+                    new google.maps.Point(17, 54),
+                    new google.maps.Size(49, 54)
+            );
+
+            if (newMarker == true) {
+                effect = google.maps.Animation.BOUNCE;
+            }
+
+            var style = 'text-indent: 5px; font-weight: bold;';
+            if (prio == 1) {
+                style = 'background-color: #ff0000; color: #FFFFFF; text-indent: 5px; font-weight: bold;';
+            } else if (prio == 2) {
+                style = 'background-color: #ed9c28; color: #FFFFFF; text-indent: 5px; font-weight: bold;';
+            } else if (prio == 3) {
+                style = 'background-color: #d40000; color: #FFFFFF; text-indent: 5px; font-weight: bold;';
+            }
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, long),
+                map: map,
+                icon: image,
+                animation: effect,
+                title: title
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(marker, 'click', (function (marker) {
+                var contentString = ''
+                        + '<div id="infoWindow-' + title + '">'
+                        + '<div id="bodyContent-' + title + '">'
+                        + '<p style="' + style + '">' + title + '<br /></p>'
+                        + '<p>' + text + '</p><br />'
+                        + '</div>'
+                        + '</div>';
+
+                return function () {
+                    infowindow.setContent(contentString);
+                    infowindow.open(map, marker);
+                    marker.setAnimation(true);
+                };
+            })(marker));
+
+            return marker;
+        };
+
+        <% @offers.each do|offer| %>
+        <% if offer.offer_type == "events" %>
+        addMarker(<%= offer.latitude.to_s %>, <%= offer.longitude.to_s; %>, 3, 'Evenement: <%= offer.title %>',
+                '<%= offer.message[0,50]  %><%= link_to '  lees meer...', event_path(offer)%><br />Geplaatst door: <%=  offer.user.firstname %><br /> op: <%=  offer.created_at %> '
+                , false,'Events.png');
+        <% elsif offer.offer_type == "offers" %>
+        addMarker(<%= offer.latitude.to_s %>, <%= offer.longitude.to_s; %>, 2, 'Aanbieding: <%= offer.title %>',
+                '<%= offer.message[0,50]  %><%= link_to '  lees meer...', offer_path(offer)%> <br />Geplaatst door: <%=  offer.user.firstname %><br />op: <%=  offer.created_at %> '
+                , false,'Ruilen.png');
+        <% end  end %>
+    }
+
+    $(document).ready(function () {
+        $("#vertical-slider").slider({
+            orientation: "vertical",
+            range: "min",
+            min: 0,
+            max: 20,
+            value: 20,
+            slide: function (event, ui) {
+                map.setZoom(ui.value);
+            }
+        });
+        setTimeout(function () {
+            initialize();
+        }, 500);
+    });
+</script>
