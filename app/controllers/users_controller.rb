@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   end
   def update
     @user = current_user
-    if @user.update_attributes(user_params[:id])
+    if @user.patch(user_params[:id])
       flash[:succes] = "Gegevens succesvol aangepast."
       redirect_to dashboard_url
     else
