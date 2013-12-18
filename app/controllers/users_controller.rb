@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = current_user;
     if @user.update_attributes(user_params)
       flash[:succes] = "Gegevens succesvol ingevuld."
-      redirect_to dashboard_url
+
     else
     end
   end
