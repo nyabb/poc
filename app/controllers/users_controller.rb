@@ -35,8 +35,7 @@ class UsersController < ApplicationController
 
   def address
     @user = current_user;
-    @user.radius = 2 ;
-    @user.update_attributes(user_params);
+
 
   end
   def update
