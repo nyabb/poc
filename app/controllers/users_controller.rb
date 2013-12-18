@@ -35,11 +35,6 @@ class UsersController < ApplicationController
 
   def address
     @user = current_user;
-    if @user.update_attributes(user_params)
-      flash[:succes] = "Gegevens succesvol ingevuld."
-
-    else
-    end
   end
   def update
     @user = current_user
