@@ -15,11 +15,11 @@ class SessionsController < ApplicationController
         redirect_to root_url
       else
         flash[:succes] = "Ongelodig wachtwoord."
-        render "new"
+        redirect_to root_url
       end
     else
        flash[:succes] = "Ongelodig email."
-      render "new"
+       redirect_to root_url
     end
   end
   def destroy
