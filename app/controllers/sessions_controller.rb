@@ -14,11 +14,11 @@ class SessionsController < ApplicationController
         end
         redirect_to root_url
       else
-        flash.alert = "invalid password"
+        flash[:succes] = "Ongelodig wachtwoord."
         render "new"
       end
     else
-      flash.alert = "Invalid email"
+       flash[:succes] = "Ongelodig email."
       render "new"
     end
   end
