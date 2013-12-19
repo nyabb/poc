@@ -11,7 +11,13 @@ class User < ActiveRecord::Base
 
   has_many :reactions, :foreign_key => 'id'
   has_many :unread_messages, :class_name => 'Message', :foreign_key => 'to_user', :conditions => {:read => false}
-  before_save { self.email = email.downcase }
+  before_save {
+    self.email = email.downcase
+    if self.latitude.blank? && self.longitude.blank?
+      self.latitude = 51.985103;
+      self.longitude = 5.898730;
+    end
+  }
 
   after_save {
     Rails.logger.debug("Test");

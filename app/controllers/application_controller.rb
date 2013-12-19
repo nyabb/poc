@@ -33,10 +33,6 @@ class ApplicationController < ActionController::Base
   def secure_page
     if !signed_in?
       redirect_to root_url
-    else
-      if current_user.latitude.blank? || current_user.longitude.blank?
-        redirect_to user_address_url
-      end
     end
   end
 
