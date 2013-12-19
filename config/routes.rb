@@ -30,7 +30,7 @@ Poc::Application.routes.draw do
   get '/auth/:provider/callback' => 'authentications#create', as: 'authentication'
 
   get "/registreer/adres"    => "users#address",   as: "user_address"
-  post "/registreer/adres"    => "users#update",   as: "user_update"
+
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]

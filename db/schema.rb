@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131210115525) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
     t.string   "provider"
@@ -76,7 +73,7 @@ ActiveRecord::Schema.define(version: 20131210115525) do
     t.string   "radius"
   end
 
-  add_index "users", ["facebook_uid"], name: "index_users_on_facebook_uid", using: :btree
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["facebook_uid"], name: "index_users_on_facebook_uid"
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
