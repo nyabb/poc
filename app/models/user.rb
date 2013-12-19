@@ -17,6 +17,9 @@ class User < ActiveRecord::Base
       self.latitude = 51.985103;
       self.longitude = 5.898730;
     end
+    if self.radius.blank?
+      self.radius = 500;
+    end
   }
 
   after_save {
