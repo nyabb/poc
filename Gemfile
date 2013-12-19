@@ -24,7 +24,7 @@ gem 'omniauth-facebook', '1.4.1'
 gem 'omniauth-identity'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 
@@ -39,6 +39,8 @@ gem 'geokit-rails'
 gem 'jquery-rails', '~> 2.3.0'
 
 gem 'jquery-ui-rails'
+
+gem "gritter", "1.0.3"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'

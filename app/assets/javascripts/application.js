@@ -11,13 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require_tree .
 //= require jquery_ujs
 //= require jquery.ui.slider
 //= require turbolinks
 //= require bootstrap
 //= require jquery-fileupload
-//= require_tree .
 //= require bootstrap-datepicker
+//= require gritter
 
 
 
