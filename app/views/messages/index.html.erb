@@ -1,5 +1,9 @@
 <script type="text/javascript">
+  <% unless @current_user.received_messages.reverse[0].nil? %>
     setId(<%= @current_user.received_messages.reverse[0].id %>);
+  <% else %>
+    setId(0);
+  <% end %>
 </script>
 
 <div style="margin-top: 40px;" class="container">

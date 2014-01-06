@@ -1,6 +1,6 @@
 module ApplicationHelper
   def translater text
-    if current_user.country.short_name != 'nl'
+    if !current_user.nil? && !current_user.country.nil? && current_user.country.short_name != 'nl'
       require 'bing_translator'
 
       translator = BingTranslator.new('dmec-grp4', 'jqoPbCnQliqVj0dTqiLc3V7hoYA138EDKqWftkt6GFo=',true)
