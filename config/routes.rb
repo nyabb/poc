@@ -18,6 +18,8 @@ Poc::Application.routes.draw do
   get "aanbiedingen" => "users#offers"
   get "aanbiedingen/reload" => "users#get_offers"
 
+  get "settings/adres"  => "users#adres",as: "settings_adres"
+
   get "chats/index"
   get "chats/chat/:id"    => "chats#show"
   post "chats/new"        => "chats#new",  as: "new_chat"

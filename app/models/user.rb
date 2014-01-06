@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :reactions, :foreign_key => 'id'
   has_many :unread_messages, :class_name => 'Message', :foreign_key => 'to_user', :conditions => {:read => false}
+=begin
   before_save {
     self.email = email.downcase
     if self.latitude.blank? && self.longitude.blank?
@@ -32,6 +33,7 @@ class User < ActiveRecord::Base
       self.save
     end
   }
+=end
 
   before_create :create_remember_me_token
 

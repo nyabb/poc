@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
   def secure_page
     if !signed_in?
       redirect_to root_url
+    else
+      if current_user.adres.blank? || current_user.zipcode.blank? || current_user.place.blank?
+        gflash :success => {:title => 'Fout', :value => "U heeft nog geen adres toegevoegd.<br /><a href='"+settings_adres_url+"'>Klik hier om een adres toe te voegen.</a>", :image => '',:sticky=> true}
+      end
     end
   end
 
@@ -45,7 +49,7 @@ class ApplicationController < ActionController::Base
   private
   def update_last_online
     if signed_in?
-      #current_user.update_attribute('last_online', DateTime.now);
+      current_user.update_attribute('last_online', DateTime.now);
     end
   end
 

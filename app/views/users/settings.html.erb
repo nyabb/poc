@@ -1,17 +1,13 @@
 <div class="container">
     <h1>Instellingen</h1>
-
-  <div class="panel panel-primary col-md-6 col-md-offset-3 col-xs-12" style="padding: 0px; position: relative; float: left; margin: 0px 15px 0px 0px;">
-    <div class="panel-heading">
-      <h3 class="panel-title">Gegevens</h3>
-    </div>
-    <div class="panel-body">
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1 col-xs-12">
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Gegevens</h3>
+          </div>
+          <div class="panel-body">
             <%= form_for(current_user, :html =>{:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
-                <div class="widget register-widget">
-
-                </div>
                 <div class="widget register-widget">
                   <div class="form-group">
                     <label class="control-label" for="firstname">
@@ -51,16 +47,48 @@
             <div id="form-error-handler"></div>
           </div>
         </div>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Adres gegevens</h3>
+          </div>
+          <div class="panel-body">
+            <%= form_for(current_user, :html =>{:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
+                <div class="widget register-widget">
+                  <div class="form-group">
+                    <label class="control-label" for="adres">
+                      Adres:
+                    </label>
+                    <%= f.text_field :adres, :class => 'form-control required', :id=>'adres', 'data_nicename'=> 'adres'; %>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="zipcode">
+                      Postcode:
+                    </label>
+                    <%= f.text_field :zipcode, :class => 'form-control required', :id=>'zipcode', 'data_nicename'=> 'postcode'; %>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label" for="place">
+                      Plaats:
+                    </label>
+                    <%= f.text_field :place, :class => 'form-control required', :id => 'place', 'data_nicename' => 'plaats'; %>
+                  </div>
+                  <div class="form-group">
+                    <%= f.submit "Opslaan", :class => "btn btn-block btn-info" %>
+                  </div>
+                </div>
+            <% end %>
+            <div id="form-error-handler"></div>
+          </div>
+        </div>
+        <div class="panel panel-primary" style="margin-top:20px;">
+          <div class="panel-heading">
+            <h3 class="panel-title">Locatie</h3>
+          </div>
+          <div class="panel-body">
+            Body
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <div class="panel panel-primary col-md-5 col-md-offset-3 col-xs-12" style="padding: 0px; position: relative; float: left; margin: 0px;">
-    <div class="panel-heading">
-      <h3 class="panel-title">Locatie</h3>
-    </div>
-    <div class="panel-body">
-      Je kunt hier je instellingen wijzigen. Je kunt onderanderen je locatie aanpassen en de radius waarin je berichten
-      wilt ontvangen. <%= link_to 'Aanpassen', user_location_path, :class => 'btn btn-primary' %>
-    </div>
-  </div>
-</div>
