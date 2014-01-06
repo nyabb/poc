@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  belongs_to  :country, :foreign_key => 'country'
   has_many :authentications
   has_many :received_messages, :class_name => 'Message', :foreign_key => 'to_user'
   has_many :sent_messages, :class_name => 'Message', :foreign_key => 'from_user'

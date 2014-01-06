@@ -28,7 +28,13 @@ class ApplicationController < ActionController::Base
     require 'net/http'
     @current_user = current_user
 
-    uri = 'http://www.willemvanlent.nl/dmec/index.php?action=getMessages&lastId=' + Message.all.reverse[0].id.to_s
+    mId = 1.to_s;
+
+    unless Message.all.reverse[0].nil?
+      mId = Message.all.reverse[0].id.to_s
+    end
+
+    uri = 'http://www.willemvanlent.nl/dmec/index.php?action=getMessages&lastId=' + mId
     json_String = Net::HTTP.get(URI.parse(uri))
     messages = ActiveSupport::JSON.decode(json_String)
     messages.each do |message|
