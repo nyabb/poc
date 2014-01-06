@@ -133,7 +133,7 @@ html{
         padding: 12px 11px 16px 11px;
       }
       .gritter-close{
-        background: rgba(0,0,0,0.5);
+        background: none;
         text-align:center;
         line-height:30px;
         font-size:14px;
@@ -143,6 +143,12 @@ html{
           content: "\2716";
         }
       }
+    }
+    a{
+      display:block;
+      color: #4cbfd2;
+      margin-top:4px;
+      margin-bottom:-2px;
     }
   }
 }
