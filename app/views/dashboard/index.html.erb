@@ -147,6 +147,16 @@
                 '<%= offer.message[0,50]  %><%= link_to '  lees meer...', offer_path(offer)%> <br />Geplaatst door: <%=  offer.user.firstname %><br />op: <%=  offer.created_at %> '
                 , false,'Ruilen.png');
         <% end  end %>
+
+        <% User.all.each do |user| %>
+            <% unless user.sent_messages.last.nil? %>
+                <% if current_user.id != user.id %>
+                    addMarker(<%= user.latitude.to_s %>, <%= user.longitude.to_s; %>, 3, 'Hulp!',
+                            '<%= user.sent_messages.last.body %> <%= link_to '  lees meer...', message_path, :class => 'btn btn-primary'%><br />Geplaatst door: <%=  user.firstname %><br /> op: <%=  user.created_at %> '
+                            , false,'Hulp.png');
+                <% end %>
+            <% end %>
+        <% end %>
     }
 
     $(document).ready(function () {

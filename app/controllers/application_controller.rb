@@ -24,6 +24,23 @@ class ApplicationController < ActionController::Base
     obj.save!
   end
 
+  def index_messages
+    require 'net/http'
+    @current_user = current_user
+
+    uri = 'http://www.willemvanlent.nl/dmec/index.php?action=getMessages&lastId=' + Message.all.reverse[0].id.to_s
+    json_String = Net::HTTP.get(URI.parse(uri))
+    messages = ActiveSupport::JSON.decode(json_String)
+    messages.each do |message|
+      user = User.where(mobile_phone: message["from"]).take
+      unless user.nil?
+        Message.create(:id => message["id"],:from_user => user.id, :to_user => @current_user.id, :body => message["message"], :message_type => 'sms', :read => 0)
+      end
+    end
+
+    messages
+  end
+
   private
   def mobile?
     request.user_agent =~ /Mobile|webOS/
