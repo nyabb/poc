@@ -4,7 +4,7 @@ Geokit::default_formula = :sphere
 Geokit::Geocoders::request_timeout = 10
 
 
-Geokit::Geocoders:google = 'AIzaSyDbxCV0RVFJ6BBkIQylihQYDwEAR3VIG1E'
+Geokit::Geocoders::google = 'AIzaSyDbxCV0RVFJ6BBkIQylihQYDwEAR3VIG1E'
 
 Geokit::Geocoders::us_geocoder = false
 
