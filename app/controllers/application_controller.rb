@@ -40,7 +40,9 @@ class ApplicationController < ActionController::Base
     messages.each do |message|
       user = User.where(mobile_phone: message["from"]).take
       unless user.nil?
-        Message.create(:id => message["id"],:from_user => user.id, :to_user => @current_user.id, :body => message["message"], :message_type => 'sms', :read => 0)
+        unless Message.exists?(id: message["id"])
+          Message.create(:id => message["id"],:from_user => user.id, :to_user => @current_user.id, :body => message["message"], :message_type => 'sms', :read => 0)
+        end
       end
     end
 
