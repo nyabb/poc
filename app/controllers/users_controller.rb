@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def new
+    @countries = Country.all();
     @user = User.new
   end
 
@@ -61,7 +62,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :password, :password_confirmation, :email,:adres,:zipcode,:place,:date_of_birth,:phone,:mobile_phone,:radius) if params[:user]
+    params.require(:user).permit(:firstname, :lastname, :password, :password_confirmation, :email,:adres,:zipcode,:place,:date_of_birth,:phone,:mobile_phone,:radius,:country_id) if params[:user]
   end
 
 end
