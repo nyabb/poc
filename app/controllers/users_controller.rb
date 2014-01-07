@@ -56,7 +56,12 @@ class UsersController < ApplicationController
   end
 
   def current_location
-    render json: current_user
+    returnItem = {}
+    returnItem[:radius] = current_user.radius
+    returnItem[:latitude] = current_user.latitude
+    returnItem[:longitude] = current_user.longitude
+
+    render json: returnItem
   end
 
   private
