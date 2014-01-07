@@ -151,7 +151,7 @@
         <% User.all.each do |user| %>
             <% if (!user.nil? || !user.sent_messages.nil? || !user.sent_messages.last.nil?) %>
                 <% if current_user.id != user.id %>
-                    <%= debug user.sent_messages %>
+                    <%= debug user.sent_messages.last %>
                 <% end %>
             <% end %>
         <% end %>
