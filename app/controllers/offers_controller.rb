@@ -25,7 +25,7 @@ class OffersController < ApplicationController
       upload_image(params, @offer)
       redirect_to @offer
     else
-      render 'new'
+       redirect_to cookies[:lastpage]
     end
   end
 

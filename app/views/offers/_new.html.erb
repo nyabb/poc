@@ -2,26 +2,27 @@
   <div class="row">
     <div class="col-md-12  col-xs-12">
 
-      <%= form_tag({action: :create}, multipart: true) do %>
+      <%= form_tag( offer_create_url, multipart: true, :onsubmit => 'return validateForm(this)') do %>
 
 
-            <div class="form-group">
+            <div class="form-group ">
               <label class="control-label" for="offer_title">
                 Titel:
               </label>
-              <%= text_field_tag :title, nil, :class => 'form-control', :id => 'offer_title'; %>
+              <%= text_field_tag :title, nil, :class => 'form-control required',:name => 'offer_title', :id => 'offer_title', :data_nicename => 'titel'; %>
             </div>
             <div class="form-group">
               <label class="control-label" for="offer_message">
                 Bericht:
               </label>
-              <%= text_area_tag :message,  nil, :class => 'form-control', :id => 'offer_message'; %>
+              <%= text_area_tag :message,  nil, :class => 'form-control required',:name => 'offer_message', :id => 'offer_message', :data_nicename => 'bericht'; %>
             </div>
+
           <div class="form-group">
             <label class="control-label" for="offer_adres">
               Adres:
             </label>
-            <%= text_field_tag nil, nil, :class => 'form-control', :id => 'offer_adres', :placeholder => "Postcode,Straat,Stad,Land",:onblur => "getLatLon()" ; %>
+            <%= text_field_tag nil, nil, :class => 'form-control required', :id => 'offer_adres', :name => 'offer_adres' , :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land",:onblur => "getLatLon()" ; %>
             of <br/>
             <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer" ,:data =>{:toggle =>"modal", :target =>"#myModal"}%>
           </div>
@@ -48,6 +49,7 @@
 
 
      <% end %>
+      <div id="form-error-handler"> </div>
 
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -203,7 +205,7 @@
 
 
         }
-            else if (address=='')
+            else
             {
                 $("#offer_longitude").val(<%= @user.longitude%>);
                 $("#offer_latitude").val(<%= @user.latitude%>);
