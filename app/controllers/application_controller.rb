@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-
+   after_filter :save_cookie
   def current_user
     if cookies[:remember_token].present?
       @current_user ||= User.find_by_remember_token(Digest::SHA1.hexdigest(cookies[:remember_token].to_s)) if cookies[:remember_token]# Use find_by_id to get nil instead of an error if user doesn't exist
@@ -50,6 +50,11 @@ class ApplicationController < ActionController::Base
   private
   def mobile?
     request.user_agent =~ /Mobile|webOS/
+  end
+
+
+  def save_cookie
+    cookies[:lastpage] = request.original_url
   end
 
   private
