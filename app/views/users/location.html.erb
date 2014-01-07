@@ -27,18 +27,14 @@
     }
 
     function setCurrentLocation() {
-        var data = {
-            latitude:  (<%= current_user.latitude.to_s ;%>),
-            longitude:  (<%= current_user.latitude.to_s ;%>),
-            radius:     (<%= current_user.radius.to_s ;%>)
-        };
+
         $.ajax(
         {
             type: 'GET',
             url: "/settings/current_location/",
             async: true,
-            data: data,
-            success: function()
+
+            success: function(data)
             {
                 addRadius( data.latitude, data.longitude,data.radius)
             }
