@@ -149,7 +149,7 @@
         <% end  end %>
 
         <% User.all.each do |user| %>
-            <% unless user.sent_messages.last.nil? %>
+            <% unless user.sent_messages.nil? && user.sent_messages.last.nil? %>
                 <% if current_user.id != user.id %>
                     addMarker(<%= user.latitude.to_s %>, <%= user.longitude.to_s; %>, 3, 'Hulp!',
                             '<%= user.sent_messages.last.body %> <%= link_to '  lees meer...', message_path, :class => 'btn btn-primary'%><br />Geplaatst door: <%=  user.firstname %><br /> op: <%=  user.created_at %> '
