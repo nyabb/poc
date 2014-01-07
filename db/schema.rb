@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140106124019) do
+ActiveRecord::Schema.define(version: 20140107095625) do
 
   create_table "authentications", force: true do |t|
     t.integer  "user_id"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20140106124019) do
     t.string   "latitude"
     t.string   "longitude"
     t.string   "radius"
-    t.integer  "country"
+    t.integer  "country_id"
   end
 
   add_index "users", ["facebook_uid"], name: "index_users_on_facebook_uid"
