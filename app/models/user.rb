@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
 
   has_many :reactions, :foreign_key => 'id'
   has_many :unread_messages, :class_name => 'Message', :foreign_key => 'to_user', :conditions => {:read => false}
-=begin
-  before_save {
+
+  before_create {
     self.email = email.downcase
     if self.latitude.blank? && self.longitude.blank?
       self.latitude = 51.985103;
@@ -24,17 +24,12 @@ class User < ActiveRecord::Base
     end
   }
 
-  after_save {
-    Rails.logger.debug("Test");
-    Rails.logger.debug(self.adres_changed?.to_s+" changed");
+  before_update {
     if self.adres_changed?
       self.latitude = "51.986210239314715"
       self.longitude = "5.951150692838496"
-      self.radius = 500
-      self.save
     end
   }
-=end
 
   before_create :create_remember_me_token
 

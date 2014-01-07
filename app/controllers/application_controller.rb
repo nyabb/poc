@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     else
       if current_user.adres.blank? || current_user.zipcode.blank? || current_user.place.blank?
-        gflash :success => {:title => 'Fout', :value => "U heeft nog geen adres toegevoegd.<br /><a href='"+settings_adres_url+"'>Klik hier om een adres toe te voegen.</a>", :image => '',:sticky=> true}
+        gflash :success => {:title => 'Fout', :value => "U heeft nog geen adres toegevoegd.<br /><a href='"+settings_url+"'>Klik hier om een adres toe te voegen.</a>", :image => '',:sticky=> true}
       end
     end
   end
@@ -75,5 +75,4 @@ class ApplicationController < ActionController::Base
       current_user.update_attribute('last_online', DateTime.now);
     end
   end
-
 end
