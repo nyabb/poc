@@ -39,6 +39,16 @@
             <%= f.password_field :password_confirmation, :class => 'form-control required', :id=>'password_confirmation', 'data_nicename' => 'Wachtwoord'; %>
           </div>
           <div class="form-group">
+            <label class="control-label" for="country">
+              Gewenste taal:
+            </label>
+            <select class="form-control required" id="country" name="user[country_id]">
+              <%= @countries.each do|country| %>
+                <option value="<%= country.id %>"><%= country.name %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="form-group">
             <%= f.submit "Registreeer", :class => "btn btn-block btn-info" %>
           </div>
         </div>
