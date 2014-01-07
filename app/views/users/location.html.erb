@@ -24,25 +24,23 @@
             data: data,
             async: true
         });
-    }
+    };
 
     function setCurrentLocation() {
-
-        $.ajax(
+                $.ajax(
         {
             type: 'GET',
             url: "/settings/current_location/",
             async: true,
-
             success: function(data)
             {
-                addRadius( data.latitude, data.longitude,data.radius)
+                addRadius(data.radius,data.latitude, data.longitude)
             }
         });
-    }
+    };
 
-    function addRadius(lat, long, radius) {
-        addCircle(lat, long, radius);
+    function addRadius(radius, lat, long) {
+        addCircle(radius, lat, long);
     };
 
     function initialize() {
@@ -54,7 +52,7 @@
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    }
+    };
 
     function addCircle(radius, lat, long) {
         var circleData = {
@@ -75,7 +73,7 @@
 
         google.maps.event.addListener(circle, 'radius_changed', saveLocation);
         google.maps.event.addListener(circle, 'mouseup', saveLocation);
-    }
+    };
 
     $(document).ready(function() {
         setTimeout(function() {
