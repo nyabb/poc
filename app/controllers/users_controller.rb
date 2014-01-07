@@ -58,7 +58,12 @@ class UsersController < ApplicationController
 
   def current_location
     returnItem = {}
-    returnItem[:radius] = current_user.radius
+    if current_user.radius.nil? || current_user.radius == ''
+      returnItem[:radius] = 500;
+    else
+      returnItem[:radius] = current_user.radius
+    end
+
     returnItem[:latitude] = current_user.latitude
     returnItem[:longitude] = current_user.longitude
 
