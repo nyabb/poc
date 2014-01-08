@@ -22,7 +22,7 @@
             <label class="control-label" for="offer_adres">
               Adres:
             </label>
-            <%= text_field_tag nil, nil, :class => 'form-control required', :id => 'offer_adres', :name => 'offer_adres' , :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land",:onblur => "getLatLon()" ; %>
+            <%= text_field_tag nil, nil, :class => 'form-control required', :name => 'offer_adres' ,:id => 'offer_adres',  :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land",:onblur => "getLatLon()" ; %>
             of <br/>
             <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer" ,:data =>{:toggle =>"modal", :target =>"#myModal"}%>
           </div>
