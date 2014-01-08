@@ -25,9 +25,12 @@ class User < ActiveRecord::Base
   }
 
   before_update {
-    if self.adres_changed?
-      self.latitude = "51.986210239314715"
-      self.longitude = "5.951150692838496"
+    if self.adres_changed? || self.zipcode_changed? || self.place_changed?
+      Rails.logger.debug 'before update jonge'
+      nl_bounds = Geokit::Geocoders::Google3Geocoder.geocode('Nederland').suggested_bounds
+      res = Geokit::Geocoders::Google3Geocoder.geocode(self.adres+' '+self.zipcode+' '+self.place, :bias => nl_bounds)
+      self.latitude = res.lat
+      self.longitude = res.lng
     end
   }
 
