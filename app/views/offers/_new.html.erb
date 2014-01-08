@@ -1,219 +1,205 @@
+<div class="row">
+  <div class="col-md-12  col-xs-12">
 
-  <div class="row">
-    <div class="col-md-12  col-xs-12">
-
-      <%= form_tag( offer_create_url, multipart: true, :onsubmit => 'return validateForm(this)') do %>
-
-
-            <div class="form-group ">
-              <label class="control-label" for="offer_title">
-                Titel:
-              </label>
-              <%= text_field_tag :title, nil, :class => 'form-control required',:name => 'offer_title', :id => 'offer_title', :data_nicename => 'titel'; %>
-            </div>
-            <div class="form-group">
-              <label class="control-label" for="offer_message">
-                Bericht:
-              </label>
-              <%= text_area_tag :message,  nil, :class => 'form-control required',:name => 'offer_message', :id => 'offer_message', :data_nicename => 'bericht'; %>
-            </div>
-
-          <div class="form-group">
-            <label class="control-label" for="offer_adres">
-              Adres:
-            </label>
-            <%= text_field_tag nil, nil, :class => 'form-control required', :name => 'offer_adres' ,:id => 'offer_adres',  :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land",:onblur => "getLatLon()" ; %>
-            of <br/>
-            <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer" ,:data =>{:toggle =>"modal", :target =>"#myModal"}%>
-          </div>
+    <%= form_tag(offer_create_url, multipart: true, :onsubmit => 'return validateForm(this)') do %>
 
 
-            <div class="form-group">
-              <label class="control-label" for="offer_message">
-                Image:
-              </label>
-                <%= file_field_tag :datafile, :id => "datafile" %>
+        <div class="form-group ">
+          <label class="control-label" for="offer_title">
+            Titel:
+          </label>
+          <%= text_field_tag :title, nil, :class => 'form-control required', :name => 'offer_title', :id => 'offer_title', :data_nicename => 'titel'; %>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="offer_message">
+            Bericht:
+          </label>
+          <%= text_area_tag :message, nil, :class => 'form-control required', :name => 'offer_message', :id => 'offer_message', :data_nicename => 'bericht'; %>
+        </div>
 
-            </div>
-              <%= hidden_field_tag :longitude,@user.longitude ,:id => 'offer_longitude'; %>
-              <%= hidden_field_tag :latitude,@user.latitude ,:id => 'offer_latitude'; %>
-              <%= hidden_field_tag :offer_type,'' ,:id => 'offer_type',:value => controller.controller_name %>
+        <div class="form-group">
+          <label class="control-label" for="offer_adres">
+            Adres:
+          </label>
+          <%= text_field_tag nil, nil, :class => 'form-control required', :name => 'offer_adres', :id => 'offer_adres', :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land", :onblur => "getLatLon()" ; %>
+          of <br/>
+          <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer", :data => {:toggle => "modal", :target => "#myModal"} %>
+        </div>
+
+
+        <div class="form-group">
+          <label class="control-label" for="offer_message">
+            Image:
+          </label>
+          <%= file_field_tag :datafile, :id => "datafile" %>
+
+        </div>
+        <%= hidden_field_tag :longitude, @user.longitude, :id => 'offer_longitude'; %>
+        <%= hidden_field_tag :latitude, @user.latitude, :id => 'offer_latitude'; %>
+        <%= hidden_field_tag :offer_type, '', :id => 'offer_type', :value => controller.controller_name %>
 
 
 
-    <div class="form-group">
+        <div class="form-group">
 
-    <%= button_tag "Verzenden", :class => "btn btn-block btn-info create_offer" %>
+          <%= button_tag "Verzenden", :class => "btn btn-block btn-info create_offer" %>
 
         </div>
 
 
-     <% end %>
-      <div id="form-error-handler"> </div>
+    <% end %>
+    <div id="form-error-handler"></div>
 
+  </div>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Locatie kiezen</h4>
+        </div>
+        <div class="modal-body">
+          <div style="height: 450px;" id="map-canvas"></div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Locatie kiezen</h4>
-          </div>
-          <div class="modal-body">
-            <div style="height: 450px;" id="map-canvas"></div>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
 </div>
 
 
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-  <script>
-      var map,
-      marker;
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    <%
+       if @user.latitude.nil? || @user.latitude == ''
+           lat = 52.to_s
+       else
+           lat = @user.latitude.to_s
+       end
 
-      var infowindow = new google.maps.InfoWindow();
+       if @user.longitude.nil? || @user.longitude == ''
+           lng = 6.to_s
+       else
+           lng = @user.longitude.to_s
+       end
+     %>
+    var map,
+        marker;
 
+    var infowindow = new google.maps.InfoWindow();
 
-      function saveLocation() {
+    function saveLocation() {
+        var lat = marker.position.lat(),
+            lng = marker.position.lng();
 
+        $("#offer_latitude").val(lat);
+        $("#offer_longitude").val(lng);
 
-          $("#offer_longitude").val(marker.position.ob);
-          $("#offer_latitude").val(marker.position.nb);
-          codeLatLng(marker.position.nb,marker.position.ob);
+        codeLatLng(lat, lng);
+    }
 
+    function addPosition() {
+        var address = document.getElementById("offer_adres").value,
+            latit = document.getElementById("offer_latitude").value,
+            longit = document.getElementById("offer_longitude").value,
+            new_center = '';
 
-
-      }
-
-      function addPosition() {
-          var address = document.getElementById("offer_adres").value;
-          var longit =  document.getElementById("offer_longitude").value;
-          var latit  =  document.getElementById("offer_latitude").value;
-          var new_center ;
-
-          if(address)
-          {
-              new_center = new google.maps.LatLng(latit, longit);
-          }
-          else
-          {
-              new_center = new google.maps.LatLng(<%= @user.latitude%>, <%= @user.longitude%>)
-          }
-
-          marker = new google.maps.Marker({
-              position:new_center,
-              map: map,
-              draggable: true
-          });
-
-          google.maps.event.addListener(marker, 'mouseup', saveLocation);
-
-
-      }
-
-      function initialize() {
-          var address = document.getElementById("offer_adres").value;
-          var longit =  document.getElementById("offer_longitude").value;
-          var latit  =  document.getElementById("offer_latitude").value;
-            var new_center ;
-
-          if(address)
-          {
+        if (address) {
             new_center = new google.maps.LatLng(latit, longit);
-          }
-          else
-          {
-              new_center = new google.maps.LatLng(<%= @user.latitude%>, <%= @user.longitude%>)
-          }
+        } else {
+            new_center = new google.maps.LatLng(<%= lat %>, <%= lng %>)
+        }
 
-          var mapOptions = {
-              zoom: 12,
-              center: new_center,
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
+        marker = new google.maps.Marker({
+            position: new_center,
+            map: map,
+            draggable: true
+        });
 
-          map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-          addPosition();
-      }
+        google.maps.event.addListener(marker, 'mouseup', saveLocation);
+    }
 
-      function codeLatLng(lati,longi) {
+    function initialize() {
+        var address = document.getElementById("offer_adres").value,
+            longit = document.getElementById("offer_longitude").value,
+            latit = document.getElementById("offer_latitude").value,
+            new_center;
 
-          var lat = parseFloat(lati);
-          var lng = parseFloat(longi);
-          var latlng = new google.maps.LatLng(lat, lng);
-          geocoder = new google.maps.Geocoder();
-          geocoder.geocode({'latLng': latlng}, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                  if (results[1]) {
+        if (address) {
+            new_center = new google.maps.LatLng(latit, longit);
+        }
+        else {
+            new_center = new google.maps.LatLng(<%= lat %>, <%= lng %>)
+        }
 
-                     infowindow.setContent(results[1].formatted_address);
-                      $("#offer_adres").val(results[1].formatted_address);
-                      infowindow.open(map, marker);
-                  } else {
-                      alert('No results found');
-                  }
-              } else {
-                  alert('Geocoder failed due to: ' + status);
-              }
-          });
-      }
+        var mapOptions = {
+            zoom: 12,
+            center: new_center,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        addPosition();
+    }
 
-      $(document).ready(function () {
+    function codeLatLng(lati, longi) {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+            'latLng': new google.maps.LatLng(parseFloat(lati), parseFloat(longi))},
+            function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        infowindow.setContent(results[1].formatted_address);
+                        $("#offer_adres").val(results[1].formatted_address);
+                        infowindow.open(map, marker);
+                    } else {
+                        alert('No results found');
+                    }
+                } else {
+                    alert('Geocoder failed due to: ' + status);
+                }
+            }
+        );
+    }
 
-          $('.modal').on('shown', function () {
-              google.maps.event.trigger(map, 'resize');
+    $(document).ready(function () {
+        $('.modal').on('shown', function () {
+            google.maps.event.trigger(map, 'resize');
+        });
 
-          })
+        setTimeout(function () {
+            initialize();
+        }, 3000);
+    });
 
-          setTimeout(function () {
-
-              initialize();
-
-          }, 3000);
-
-      });
-
-        function getLatLon()
-        {
-
-            var address = document.getElementById("offer_adres").value;
-            var geocoder =  new google.maps.Geocoder();
-            if(address)
-            {
-            geocoder.geocode( { 'address': address}, function(results, status) {
+    function getLatLon() {
+        var address = document.getElementById("offer_adres").value;
+        if (address) {
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
 
-                    $("#offer_longitude").val(results[0].geometry.location.lng());
                     $("#offer_latitude").val(results[0].geometry.location.lat());
+                    $("#offer_longitude").val(results[0].geometry.location.lng());
 
                 }
             });
 
-                setTimeout(function () {
-                        initialize();
-
-                   }, 1000);
-
-
+            setTimeout(function () {
+                initialize();
+            }, 1000);
+        } else {
+            $("#offer_latitude").val(<%= lat %>);
+            $("#offer_longitude").val(<%= lng %>);
         }
-            else
-            {
-                $("#offer_longitude").val(<%= @user.longitude%>);
-                $("#offer_latitude").val(<%= @user.latitude%>);
-
-            }
     }
-
-
-
-  </script>
+</script>
 
