@@ -60,7 +60,7 @@
             strokeWeight: 6,
             fillColor: '#e5323f',
             fillOpacity: 0.25,
-            center: new google.maps.LatLng(<%= @user.latitude %>, <%=@user.longitude %>),
+            center: new google.maps.LatLng(<%= lat %>, <%= lng %>),
             radius: parseFloat(<%= @user.radius; %>)
         };
 //        var innerCircle = new google.maps.Circle(innerCircleData);
