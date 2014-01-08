@@ -31,3 +31,5 @@ log/development.log
 .idea/runConfigurations/spec.xml
 .idea/runConfigurations/test.xml
 app/views/.DS_Store
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
