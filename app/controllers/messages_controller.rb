@@ -45,7 +45,7 @@ class MessagesController < ApplicationController
   private
   def send_message (user, message, receiver)
     require 'net/http'
-    uri = 'https://rest.nexmo.com/sms/json?api_key=1535ce1b&api_secret=edaf2405&from=' + user.firstname + '&to=' + receiver.mobile_phone + '&text=' + message
+    uri = 'https://rest.nexmo.com/sms/json?api_key=f1bb3c13&api_secret=ff232359&from=' + user.firstname + '&to=' + receiver.mobile_phone + '&text=' + message
     Net::HTTP.get(URI.parse(URI.encode(uri)))
   end
 end
