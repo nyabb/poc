@@ -47,13 +47,13 @@
     };
 
     <%
-        if current_user.latitude == ''
+        if current_user.latitude.nil? || current_user.latitude == ''
             lat = 52.to_s
         else
             lat = current_user.latitude.to_s
         end
 
-        if current_user.longitude == ''
+        if current_user.longitude.nil? || current_user.longitude == ''
             lng = 6.to_s
         else
             lng = current_user.longitude.to_s
