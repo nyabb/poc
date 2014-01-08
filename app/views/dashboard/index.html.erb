@@ -48,7 +48,7 @@
             strokeOpacity: 0.9,
             strokeWeight: 7,
             fillOpacity: 0,
-            center: new google.maps.LatLng(<%= @user.latitude %>, <%=@user.longitude %>),
+            center: new google.maps.LatLng(<%= lat%>, <%=lng %>),
             radius: parseFloat(<%= @user.radius; %>)
         };
 //        var outerCircle = new google.maps.Circle(outerCircleData);
