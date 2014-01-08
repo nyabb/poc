@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   end
 
   def settings
+    @countries = Country.all();
   end
 
   def location

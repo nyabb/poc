@@ -40,6 +40,12 @@
                     <%= f.password_field :password_confirmation, :class => 'form-control required', :id=>'password_confirmation', 'data_nicename' => 'Wachtwoord'; %>
                   </div>
                   <div class="form-group">
+                    <label class="control-label" for="country">
+                      Gewenste taal:
+                    </label>
+                    <%= f.collection_select(:country_id,Country.all,:id,:name,{},{:class=>'form-control',:id=>'country'}); %>
+                  </div>
+                  <div class="form-group">
                     <%= f.submit "Opslaan", :class => "btn btn-block btn-info" %>
                   </div>
                 </div>
@@ -87,7 +93,9 @@
             <h3 class="panel-title">Locatie</h3>
           </div>
           <div class="panel-body">
-            Body
+            <a href="<%= user_location_url;%>" class="btn btn-primary">
+              Selecteer locatie
+            </a>
           </div>
         </div>
       </div>
