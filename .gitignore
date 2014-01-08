@@ -33,3 +33,7 @@ log/development.log
 app/views/.DS_Store
 .idea/inspectionProfiles/Project_Default.xml
 .idea/inspectionProfiles/profiles_settings.xml
+app/assets/.DS_Store
+app/assets/javascripts/jquery.joyride-2.1.js
+app/assets/stylesheets/joyride-2.1.css
+app/views/dashboard/.DS_Store
