@@ -64,8 +64,17 @@ class UsersController < ApplicationController
       returnItem[:radius] = current_user.radius
     end
 
-    returnItem[:latitude] = current_user.latitude
-    returnItem[:longitude] = current_user.longitude
+    if current_user.latitude.nil? || current_user.latitude == ''
+      returnItem[:latitude] = 52;
+    else
+      returnItem[:latitude] = current_user.latitude
+    end
+
+    if current_user.longitude.nil? || current_user.longitude == ''
+      returnItem[:longitude] = 6;
+    else
+      returnItem[:longitude] = current_user.longitude
+    end
 
     render json: returnItem
   end
