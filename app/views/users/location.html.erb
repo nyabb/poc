@@ -37,7 +37,7 @@
             async: true,
             success: function(data)
             {
-                addRadius(data.radius,data.latitude, data.longitude)
+                addRadius(data.radius, data.latitude, data.longitude)
             }
         });
     };
@@ -46,10 +46,24 @@
         addCircle(radius, lat, long);
     };
 
+    <%
+        if current_user.latitude == ''
+            lat = 52.to_s
+        else
+            lat = current_user.latitude.to_s
+        end
+
+        if current_user.longitude == ''
+            lng = 6.to_s
+        else
+            lng = current_user.longitude.to_s
+        end
+    %>
+
     function initialize() {
         var mapOptions = {
             zoom: 17,
-            center: new google.maps.LatLng(<%= current_user.latitude.to_s + "," + current_user.longitude.to_s; %>),
+            center: new google.maps.LatLng(<%= lat + "," + lng; %>),
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             disableDefaultUI: true
         };
