@@ -50,7 +50,7 @@ Poc::Application.routes.draw do
   get  "offers/show/:id"   =>  "offers#show", as: "offer"
   get  "offers/delete/:id"   =>  "offers#delete_offer", as: "delete"
 
-  post  "offers/creates"      =>  "offers#create",    as: "offer_create"
+  post  "offers/create"      =>  "offers#create",    as: "offer_create"
 
   post "reactions/create"    =>  "reactions#create",  as: "reaction_create"
 
