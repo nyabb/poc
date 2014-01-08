@@ -1,4 +1,5 @@
 Poc::Application.routes.draw do
+
   get "events/index"
   get "events/show"
   get "events/creat"
@@ -43,6 +44,7 @@ Poc::Application.routes.draw do
 
   get  "events"   =>  "events#index",         as: "events_all"
   post  "events"      =>  "events#create",    as: "event_create"
+  post  "offers"      =>  "offers#create",    as: "offer_create"
   get  "events/show/:id"   =>  "events#show", as: "event"
   get  "events/delete/:id"   =>  "events#delete_event", as: "delete_event"
   get  "offers"   =>  "offers#index",         as: "offers_all"
@@ -50,7 +52,7 @@ Poc::Application.routes.draw do
   get  "offers/show/:id"   =>  "offers#show", as: "offer"
   get  "offers/delete/:id"   =>  "offers#delete_offer", as: "delete"
 
-  post  "offers/create"      =>  "offers#create",    as: "offer_create"
+
 
   post "reactions/create"    =>  "reactions#create",  as: "reaction_create"
 
