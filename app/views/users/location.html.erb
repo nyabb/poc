@@ -12,8 +12,8 @@
 
     function saveLocation() {
         var data = {
-            latitude:   circle.center.nb,
-            longitude:  circle.center.ob,
+            latitude:   circle.getCenter().lat(),
+            longitude:  circle.getCenter().lng(),
             radius:     circle.getRadius()
         };
 
@@ -22,12 +22,15 @@
             type: 'POST',
             url: "/settings/save_location/",
             data: data,
-            async: true
+            async: true,
+            success: function(data) {
+                alert('Locatie is succesvol opgeslagen!');
+            }
         });
     };
 
     function setCurrentLocation() {
-                $.ajax(
+        $.ajax(
         {
             type: 'GET',
             url: "/settings/current_location/",
