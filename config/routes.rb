@@ -10,6 +10,7 @@ Poc::Application.routes.draw do
   get "messages/reload" => "messages#indexer"
   get "messages/reload/:id" => "messages#indexerid"
   get "messages/send/:message_id/:message" => "messages#sender"
+  post "messages/create" => "messages#create"
 
   get "settings" => "users#settings", as: 'settings'
   get "settings/location" => "users#location",   as: 'user_location'

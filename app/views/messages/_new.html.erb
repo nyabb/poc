@@ -1,0 +1,27 @@
+<div class="col-md-12  col-xs-12">
+
+  <%= form_tag url_for(:controller => controller.controller_name, :action => 'create') ,multipart: true, :onsubmit => 'return validateForm(this)' do %>
+
+      <div class="form-group">
+        <label class="control-label" for="offer_message">
+          Bericht:
+        </label>
+        <%= text_area_tag :body, nil, :class => 'form-control required',  :id => 'offer_message', :data_nicename => 'bericht'; %>
+      </div>
+
+      <%= hidden_field_tag :message_type, '', :id => 'message_type', :value => 'web'  %>
+      <%= hidden_field_tag :from_user, '', :id => 'from', :value => @current_user.id  %>
+
+
+      <div class="form-group">
+
+        <%= button_tag "Verzenden", :class => "btn btn-block btn-info" %>
+
+      </div>
+
+
+  <% end %>
+  <div id="form-error-handler"></div>
+
+</div>
+

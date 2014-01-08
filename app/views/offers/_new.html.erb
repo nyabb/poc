@@ -23,7 +23,7 @@
           </label>
           <%= text_field_tag nil, nil, :class => 'form-control required',  :id => 'offer_adres', :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land", :onchange => "getLatLon()" ; %>
           of <br/>
-          <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer", :data => {:toggle => "modal", :target => "#myModal"} %>
+          <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer_location", :data => {:toggle => "modal", :target => "#myModal"} %>
         </div>
 
 
@@ -64,7 +64,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -168,13 +167,13 @@
     }
 
     $(document).ready(function () {
-        $('.modal').on('shown', function () {
-            google.maps.event.trigger(map, 'resize');
+        $('.create_offer_location').on('click', function () {
+            setTimeout(function () {
+                initialize();
+            }, 3000);
         });
 
-        setTimeout(function () {
-            initialize();
-        }, 3000);
+
     });
 
     function getLatLon() {

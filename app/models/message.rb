@@ -13,6 +13,10 @@ class Message < ActiveRecord::Base
   def self.chatfeed(from_user, to_user)
     Message.where(from_user: [from_user, to_user], to_user: [from_user, to_user], message_type: 'chat');
   end
+  def self.getwebmessages
+    messages = Message.all.where(:message_type => 'web').group(:from_user)
+    messages
+  end
 
   private
 

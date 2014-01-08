@@ -6,13 +6,24 @@
   <% end %>
 </script>
 
-<div style="margin-top: 40px;" class="container">
-  <h1>Hulp gevraagd</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header" style="color: #FE5214">Hulp gevraagd
+        <small> bij U inDeBuurt</small>
+      </h2>
 
+    </div>
+
+  </div>
+  <div class="col-md-9">
+
+    <h5 class="page-header" style="color: #FE5214">telefonische hulp</h5>
+    <div class="row">
   <div id="received-messages">
 <% User.all.each do |user| %>
     <% unless user.sent_messages.last.nil? %>
-        <% message = user.sent_messages.last %>
+        <% message = user.sent_messages.where(:message_type => 'sms').last %>
         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
           <div class="panel panel-danger panel_va ">
 
@@ -38,5 +49,67 @@
         </div>
     <% end %>
 <% end %>
+  </div>
+ </div>
+    <h5 class="page-header" style="color: #FE5214">web hulp</h5>
+    <div class="row">
+      <div id="received-messages">
+        <% @messages.each do |message| %>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                  <div class="panel panel-danger panel_va ">
+
+                    <div class="panel-heading">
+                      <h5><%= message.sender.firstname %> stuurde op <%= message.created_at %></h5>
+                    </div>
+                    <div class="panel-body">
+                      <p><%= message.body %></p>
+
+                      <% if message.read %>
+                          <div class="btn-group btn-group-ms">
+                            <button class="btn btn-primary disabled" type="button" role="button">Verstuurd <i class="fa fa-check"></i></button>
+                          </div>
+                      <% else %>
+                          <%= text_area_tag(message.id, '', :placeholder => 'Stuur wat terug!', :class => 'form-control') %>
+                          <br />
+                          <div class="btn-group btn-group-ms">
+                            <button data-receiver-id="<%= message.id %>" type="button" role="button" class="answer_message btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
+                          </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+
+      </div>
+      </div>
+
+    </div>
+  <div class="col-md-3">
+    <ul class="media-list">
+      <li class="media well well-small">
+        <h4>Vraag om hulp.</h4>
+        <p>
+          <%= render partial: "new"%>
+        </p>
+      </li>
+      <li>
+        <h5>Testiomonials</h5>
+      </li>
+      <li class="media well well-small">
+        <a class="pull-left" href="#">
+          <%= image_tag "logo.png", :class => "media-object", :alt => "bootstrap business template" %>
+        </a>
+
+        <div class="media-body">
+          Cras sit amet nibh libero metus
+          Cras sit amet nibh ...
+          <small> November 15 2012</small>
+          <a class="pull-right" href="#"><strong>Kim</strong></a>
+        </div>
+      </li>
+
+
+    </ul>
+
   </div>
 </div>
