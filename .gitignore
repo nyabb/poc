@@ -26,3 +26,8 @@ log/development.log
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
+.idea/runConfigurations/Development__poc.xml
+.idea/runConfigurations/Production__poc.xml
+.idea/runConfigurations/spec.xml
+.idea/runConfigurations/test.xml
+app/views/.DS_Store
