@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.from_user= @current_user.id
     @message.read=false
-
+    sender = @current_user
     if @message.save
       flash[:notice] = 'U hebt om hulp gevraagd!'
       redirect_to message_url
@@ -28,6 +28,7 @@ class MessagesController < ApplicationController
     end
   end
   def react_web
+    sender = @current_user
     @message = Message.new(message_params)
     @message.from_user = @current_user.id
     @message.to_user = params[:receiver_id]
