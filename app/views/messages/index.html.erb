@@ -55,7 +55,7 @@
     <div class="row">
       <div id="received-messages">
         <% @messages.each do |message| %>
-            <% unless user.sent_messages.nil? %>
+            <% unless message.nil? %>
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                   <div class="panel panel-danger panel_va ">
 
