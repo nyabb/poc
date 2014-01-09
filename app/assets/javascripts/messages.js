@@ -41,8 +41,8 @@ $(document).ready(function() {
                 success: function(data)
                 {
                     $(this).prev().val('');
-                    alert (message_id);
-                    alert("bericht verzonden aan ");
+
+                    alert("hulp aangeboden!");
                 }
             });
 
