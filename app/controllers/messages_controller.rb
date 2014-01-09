@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   def index
     index_messages
     @current_user = current_user
+    @messages = Message.getwebmessages
   end
 
   def indexer
@@ -9,6 +10,21 @@ class MessagesController < ApplicationController
     @current_user = current_user
     messages = @current_user.unread_messages.reverse!
     render json: messages
+  end
+
+  def create
+    @message = Message.new(message_params)
+    @message.from_user= @current_user.id
+    @message.read=false
+    sender = @current_user
+    if @message.save
+      flash[:notice] = 'U hebt om hulp gevraagd!'
+      redirect_to message_url
+    else
+      flash[:notice] = 'Uw aanvraag is niet gelukt!'
+      redirect_to message_url
+
+    end
   end
 
   def indexerid
@@ -43,6 +59,10 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def message_params
+    params.permit(:from_user, :to_user, :body, :message_type ,:read)
+  end
   def send_message (user, message, receiver)
     require 'net/http'
     uri = 'https://rest.nexmo.com/sms/json?api_key=f1bb3c13&api_secret=ff232359&from=' + user.firstname + '&to=' + receiver.mobile_phone + '&text=' + message

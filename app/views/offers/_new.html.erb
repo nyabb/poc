@@ -1,29 +1,29 @@
 <div class="row">
   <div class="col-md-12  col-xs-12">
 
-    <%= form_tag(offer_create_url, multipart: true, :onsubmit => 'return validateForm(this)') do %>
+    <%= form_tag url_for(:controller => controller.controller_name, :action => 'create') ,multipart: true, :onsubmit => 'return validateForm(this)' do %>
 
 
         <div class="form-group ">
           <label class="control-label" for="offer_title">
             Titel:
           </label>
-          <%= text_field_tag :title, nil, :class => 'form-control required', :name => 'offer_title', :id => 'offer_title', :data_nicename => 'titel'; %>
+          <%= text_field_tag :title, nil, :class => 'form-control required',  :id => 'offer_title', :data_nicename => 'titel'; %>
         </div>
         <div class="form-group">
           <label class="control-label" for="offer_message">
             Bericht:
           </label>
-          <%= text_area_tag :message, nil, :class => 'form-control required', :name => 'offer_message', :id => 'offer_message', :data_nicename => 'bericht'; %>
+          <%= text_area_tag :message, nil, :class => 'form-control required',  :id => 'offer_message', :data_nicename => 'bericht'; %>
         </div>
 
         <div class="form-group">
           <label class="control-label" for="offer_adres">
             Adres:
           </label>
-          <%= text_field_tag nil, nil, :class => 'form-control required', :name => 'offer_adres', :id => 'offer_adres', :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land", :onblur => "getLatLon()" ; %>
+          <%= text_field_tag nil, nil, :class => 'form-control required',  :id => 'offer_adres', :data_nicename => 'adres', :placeholder => "Postcode,Straat,Stad,Land", :onchange => "getLatLon()" ; %>
           of <br/>
-          <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer", :data => {:toggle => "modal", :target => "#myModal"} %>
+          <%= button_tag "Kies op kaart", :class => "btn btn-small btn-success create_offer_location", :data => {:toggle => "modal", :target => "#myModal"} %>
         </div>
 
 
@@ -42,7 +42,7 @@
 
         <div class="form-group">
 
-          <%= button_tag "Verzenden", :class => "btn btn-block btn-info create_offer" %>
+          <%= button_tag "Verzenden", :class => "btn btn-block btn-info" %>
 
         </div>
 
@@ -64,7 +64,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -106,7 +105,8 @@
         codeLatLng(lat, lng);
     }
 
-    function addPosition() {
+    function getCenter()
+    {
         var address = document.getElementById("offer_adres").value,
             latit = document.getElementById("offer_latitude").value,
             longit = document.getElementById("offer_longitude").value,
@@ -118,6 +118,12 @@
             new_center = new google.maps.LatLng(<%= lat %>, <%= lng %>)
         }
 
+        return new_center;
+    }
+
+    function addPosition() {
+        var new_center =  getCenter();
+
         marker = new google.maps.Marker({
             position: new_center,
             map: map,
@@ -128,17 +134,7 @@
     }
 
     function initialize() {
-        var address = document.getElementById("offer_adres").value,
-            longit = document.getElementById("offer_longitude").value,
-            latit = document.getElementById("offer_latitude").value,
-            new_center;
-
-        if (address) {
-            new_center = new google.maps.LatLng(latit, longit);
-        }
-        else {
-            new_center = new google.maps.LatLng(<%= lat %>, <%= lng %>)
-        }
+        var new_center =  getCenter();
 
         var mapOptions = {
             zoom: 12,
@@ -171,13 +167,13 @@
     }
 
     $(document).ready(function () {
-        $('.modal').on('shown', function () {
-            google.maps.event.trigger(map, 'resize');
+        $('.create_offer_location').on('click', function () {
+            setTimeout(function () {
+                initialize();
+            }, 3000);
         });
 
-        setTimeout(function () {
-            initialize();
-        }, 3000);
+
     });
 
     function getLatLon() {
@@ -192,14 +188,13 @@
 
                 }
             });
-
-            setTimeout(function () {
-                initialize();
-            }, 1000);
-        } else {
+        } else{
             $("#offer_latitude").val(<%= lat %>);
             $("#offer_longitude").val(<%= lng %>);
         }
+        setTimeout(function () {
+            initialize();
+        }, 1000);
     }
 </script>
 

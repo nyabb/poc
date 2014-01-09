@@ -80,7 +80,10 @@ h1 {
 }
  .alert
  {
+   position: absolute;
    text-align: center;
+   top: 50px;
+   width: 100%;
  }
 
 .navbar-collapse.in {

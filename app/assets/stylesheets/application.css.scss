@@ -78,11 +78,17 @@ body
     }
   }
 }
- .thumbnail{overflow:hidden;}
- .thumbnail h3,   .thumbnail h4,  .thumbnail h4 { margin:-4px -4px 4px; line-height:44px; }
- .well h4,   .well h3
+ .thumbnail
  {
-   margin: -18px -18px 3px;
+   overflow:hidden;
+ }
+ .thumbnail h3,   .thumbnail h4,  .thumbnail h4
+ {
+   margin:-4px -4px 4px; line-height:44px;
+ }
+ .well h4,   .well h3, .well h2
+ {
+   margin: -18px -18px 3px !important;
    line-height: 44px;
    padding: 0 18px;
  }

@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-  before_filter :secure_page
+
 
   rescue_from ActiveRecord::RecordNotFound do
     flash[:correct] = 'Aanbieding bestaat niet meer!'

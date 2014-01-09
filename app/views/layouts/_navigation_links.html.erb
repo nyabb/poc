@@ -1,22 +1,20 @@
 <% if @current_user.present? %>
-    <li><%= link_to translater('Home'), root_path %></li>
-    <li><%= link_to translater('Ruilen'), offers_all_url %></li>
-    <li><%= link_to translater('Evenementen'), events_all_url %></li>
-    <li><%= link_to translater('Hulp'), message_path %></li>
-    <li> <%= link_to profile_url do %>
-          <%= translater('Profiel') %>
-      <% end %>
+    <li><%= link_to translater('Home'), root_path, id: 'home' %></li>
+    <li><%= link_to translater('Ruilen'), offers_all_url, id: 'ruilen' %></li>
+    <li><%= link_to translater('Evenementen'), events_all_url, id: 'events' %></li>
+    <li><%= link_to translater('Hulp'), message_path, id: 'hulp' %></li>
+    <li><%= link_to translater('Profiel'), profile_url, id: 'profiel'%>
     </li>
     <li class="dropdown pull-right">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= translater('Account') %> <b class="caret"></b></a>
+      <a href="#" class="dropdown-toggle" id="account" data-toggle="dropdown"><%= translater('Account') %> <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li> <%= link_to settings_url do %>
+        <li> <%= link_to settings_url, id: 'settings' do %>
               <i class="fa fa-cog"></i> <%= translater('Instellingen') %>
           <% end %>
         </li>
         <li><a id="handleiding-button" href="<%= handleiding_url %>"><%= translater('Handleiding') %></a></li>
         <li class="divider"></li>
-        <li><%= link_to logout_url do %>
+        <li><%= link_to logout_url, id: 'logout' do %>
               <i class="fa fa-sign-out"></i><%= translater('Loguit') %>
           <% end %>
         </li>
