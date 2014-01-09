@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initialize"></script>
 <script>
     var map,
         circle;
@@ -71,6 +71,8 @@
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        setCurrentLocation();
     };
 
     function addCircle(radius, lat, long) {
@@ -89,20 +91,7 @@
 
         circle.setEditable(true);
         circle.setDraggable(true);
-
-//        google.maps.event.addListener(circle, 'radius_changed', saveLocation);
-//        google.maps.event.addListener(circle, 'mouseup', saveLocation);
     };
-
-    $(document).ready(function() {
-        setTimeout(function() {
-            initialize();
-        }, 500);
-
-        setTimeout(function() {
-            setCurrentLocation();
-        }, 1000);
-    });
 
     $(document).on('click', '#save-button', function() {
         saveLocation();

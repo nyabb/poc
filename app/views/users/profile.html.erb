@@ -37,7 +37,7 @@
   </div>
 </div>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initialize"></script>
 <script>
     var map,
         marker;
@@ -55,6 +55,8 @@
         };
 
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        setCurrentLocation();
     }
 
     function addLocation(lat, long) {
@@ -69,14 +71,4 @@
 
         return marker;
     }
-
-    $(document).ready(function() {
-        setTimeout(function() {
-            initialize();
-        }, 500);
-
-        setTimeout(function() {
-            setCurrentLocation();
-        }, 1000);
-    });
 </script>
