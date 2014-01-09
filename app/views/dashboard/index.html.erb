@@ -4,8 +4,8 @@
   <div id="vertical-slider"></div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<div id="switch-hulp-markers"></div>
-<div id="switch-offer-markers"></div>
+<div id="switch-hulp-markers" class="switch-marker"></div>
+<div id="switch-offer-markers" class="switch-marker"></div>
 <script>
     var map;
 
@@ -180,9 +180,11 @@
     $(document).ready(function () {
         $("#switch-hulp-markers").click(function(){
            switch_markers(hulp_markers);
+            $(this).toggleClass("off");
         });
         $("#switch-offer-markers").click(function(){
            switch_markers(offer_markers);
+           $(this).toggleClass("off");
         });
         $("#vertical-slider").slider({
             orientation: "vertical",
