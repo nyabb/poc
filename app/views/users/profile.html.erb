@@ -96,7 +96,10 @@
       <% @messages.each do  |message|%>
       <p>Bericht: <%= message.body %></p>
           <% @web_reactions.each do |reactions| %>
+            <% if reactions.reactions_to == message.id %>
               <p>Reactie van <%= reactions.sender.firstname %> : <%= reactions.body %></p>
+             <% else %>
+              <% end %>
           <% end %>
         <% end %>
     </div>
