@@ -14,7 +14,7 @@ class Message < ActiveRecord::Base
     Message.where(from_user: [from_user, to_user], to_user: [from_user, to_user], message_type: 'chat');
   end
   def self.getwebmessages
-    messages = Message.all.where(:message_type => 'web').group(:from_user, :id,:to_user, :body, :message_type, :reaction_to)
+    messages = Message.all.where(:message_type => 'web').group(:from_user, :id,:to_user, :body, :message_type, :reactions_to)
     messages
   end
 
