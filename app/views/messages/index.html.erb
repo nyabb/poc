@@ -64,17 +64,21 @@
                     <div class="panel-body">
                       <p><%= message.body %></p>
 
-                      <% if message.read %>
+                      <% if message.read%>
                           <div class="btn-group btn-group-ms">
-                            <button class="btn btn-primary disabled" type="button" role="button">Verstuurd <i class="fa fa-check"></i></button>
+                            <button class="btn btn-primary disabled" type="button" role="button">Geholpen<i class="fa fa-check"></i></button>
                           </div>
+                      <% else if message.from_user == current_user.id%>
+
                       <% else %>
                           <%= text_area_tag(message.id, '', :placeholder => 'Stuur wat terug!', :class => 'form-control') %>
-                          <br />
+
+                              <br />
                           <div class="btn-group btn-group-ms">
-                            <button data-receiver-id="<%= message.id %>" type="button" role="button" class="answer_message_web btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
+                            <button data-receiver-id-web="<%= message.sender.id %>" type="button" role="button" class="answer_message_web btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
                           </div>
                       <% end %>
+                          <% end %>
                     </div>
                   </div>
                 </div>

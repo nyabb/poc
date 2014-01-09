@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
     index_messages
     @current_user = current_user
     @messages = Message.getwebmessages
+    @web_reactions = Message.getwebreactions
   end
 
   def indexer
@@ -16,7 +17,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.from_user= @current_user.id
     @message.read=false
-    sender = @current_user
+
     if @message.save
       flash[:notice] = 'U hebt om hulp gevraagd!'
       redirect_to message_url
@@ -26,6 +27,28 @@ class MessagesController < ApplicationController
 
     end
   end
+  def react_web
+    @message = Message.new(message_params)
+    @message.from_user = @current_user.id
+    @message.to_user = params[:receiver_id]
+    @message.message_type='reactions'
+    @message.body = params[:body]
+    @message.reactions_to = params[:message_id]
+
+    if @message.save
+      m = Message.find(params[:message_id])
+      m.read = true
+      m.save
+      flash[:notice] = 'U hebt uw hulp aangeboden!'
+
+      redirect_to message_url
+    else
+      flash[:notice] = 'Uw aanvraag is niet gelukt!'
+      redirect_to message_url
+
+    end
+
+    end
 
   def indexerid
     index_messages

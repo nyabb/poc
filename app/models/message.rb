@@ -18,6 +18,11 @@ class Message < ActiveRecord::Base
     messages
   end
 
+  def self.getwebreactions
+    messages =  Message.all.where(:message_type => 'reactions', :to_user => @current_user)
+    messages
+  end
+
   private
 
   def read_message

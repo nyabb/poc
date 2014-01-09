@@ -30,24 +30,26 @@ $(document).ready(function() {
     });
 
     $(document).on('click', ".answer_message_web", function(){
-        var receiver_id = $(this).data("receiver-id"),
-            message = $(this).parent().prev().prev().val();
+        var receiver_id = $(this).data("receiver-id-web"),
+            message_id = $(this).parent().prev().prev().attr('id'),
+            body = $(this).parent().prev().prev().val();
         $.ajax(
             {
                 type: 'GET',
-                url: "/messages/send/" + receiver_id + "/" + message,
+                url: "/messages/react_web/" + receiver_id + "/" + body + "/" + message_id,
                 async: true,
                 success: function(data)
                 {
                     $(this).prev().val('');
-                    alert("bericht verzonden aan " + data.firstname);
+                    alert (message_id);
+                    alert("bericht verzonden aan ");
                 }
             });
 
         parent = $(this).parent();
         parent.prev().prev().remove();
         parent.prev().remove();
-        parent.prev().parent().append('<div class="btn-group btn-group-ms"><button class="btn btn-primary disabled" type="button" role="button">Verstuurd <i class="fa fa-check"></i></button></div>');
+        parent.prev().parent().append('<div class="btn-group btn-group-ms"><button class="btn btn-primary disabled" type="button" role="button">Geholpen <i class="fa fa-check"></i></button></div>');
         parent.remove();
 
     });

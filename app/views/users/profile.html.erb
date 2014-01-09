@@ -32,6 +32,9 @@
     <div class="panel-body">
       <% @messages.each do  |message|%>
       <p>Bericht: <%= message.body %></p>
+          <% @web_reactions.each do |reactions| %>
+              <p>Reactie van <%= reactions.sender.firstname %> : <%= reactions.body %></p>
+          <% end %>
         <% end %>
     </div>
   </div>
