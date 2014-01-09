@@ -214,7 +214,7 @@
 
             button_text : function (txt) {
                 if (settings.nextButton) {
-                    txt = $.trim(txt) || 'Next';
+                    txt = $.trim(txt) || 'Volgende';
                     txt = methods.outerHTML($(settings.template.button).append(txt)[0]);
                 } else {
                     txt = '';
