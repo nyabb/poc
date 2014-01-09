@@ -55,6 +55,7 @@
     <div class="row">
       <div id="received-messages">
         <% @messages.each do |message| %>
+            <% unless user.sent_messages.nil? %>
           <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                   <div class="panel panel-danger panel_va ">
 
@@ -78,6 +79,7 @@
                             <button data-receiver-id-web="<%= message.sender.id %>" type="button" role="button" class="answer_message_web btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
                           </div>
                       <% end %>
+                          <% end %>
                           <% end %>
                     </div>
                   </div>
