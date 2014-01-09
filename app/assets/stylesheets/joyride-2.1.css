@@ -267,5 +267,38 @@ body {
 }
 
 .small p {
-    width: 230px;
+    width: 230px !important;
+}
+
+.small {
+    left: 867px !important;
+}
+
+.small .top {
+    left: 252px !important;
+}
+
+.info-style .joyride-next-tip {
+    border: solid 1px rgb(212, 0, 0);
+    border: solid 1px rgb(212, 0, 0);
+    background: rgb(212, 0, 0);
+    background: -moz-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(212, 55, 60)), color-stop(100%, rgb(212, 0, 0)));
+    background: -webkit-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    background: -o-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    background: -ms-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D40000', endColorstr='#0055d6',GradientType=0 );
+    background: linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+}
+
+.info-style .joyride-next-tip:hover {
+    border: solid 1px rgb(212, 0, 0) !important;
+    background: rgb(212, 55, 60);
+    background: -moz-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgb(212, 55, 60)), color-stop(100%, rgb(212, 0, 0)));
+    background: -webkit-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    background: -o-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    background: -ms-linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D40000', endColorstr='#0055d6',GradientType=0 );
+    background: linear-gradient(top, rgb(212, 55, 60) 0%, rgb(212, 0, 0) 100%);
 }
