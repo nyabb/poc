@@ -1,26 +1,89 @@
 <div class="container">
-  <h1>Mijn huis</h1>
-
-  <div class="panel panel-primary col-xs-6" style="margin-right: 15px; padding: 0px;">
-    <div class="panel-heading">
-      <h3 class="panel-title">Huize <%= @user.lastname %></h3>
-    </div>
-    <div class="panel-body">
-        <p>Naam: <%= "#{@user.firstname} #{@user.lastname}" %></p>
-        <p>Plaats: <%= @user.place %></p>
-        <p>Adres: <%= @user.adres %></p>
-        <p>Postcode: <%= @user.zipcode %></p>
-        <p>Telefoon: <%= @user.phone %></p>
-        <p>Mobiel: <%= @user.mobile_phone %></p>
+  <div class="row">
+    <div class="col-md-12 col-xs-12">
+      <h1>Mijn huis</h1>
     </div>
   </div>
-
-  <div class="panel panel-primary col-xs-6" style="width: 48%; padding: 0px;">
-    <div class="panel-heading">
-      <h3 class="panel-title">Locatie</h3>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Huize <%= @user.lastname %></h3>
+        </div>
+        <div class="panel-body">
+          <p>Naam: <%= "#{@user.firstname} #{@user.lastname}" %></p>
+          <p>Plaats: <%= @user.place %></p>
+          <p>Adres: <%= @user.adres %></p>
+          <p>Postcode: <%= @user.zipcode %></p>
+          <p>Telefoon: <%= @user.phone %></p>
+          <p>Mobiel: <%= @user.mobile_phone %></p>
+        </div>
+      </div>
     </div>
-    <div class="panel-body">
-      <div style="height: 500px; margin: 0px; padding: 0px" id="map-canvas"></div>
+    <div class="col-md-6 col-xs-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Locatie</h3>
+        </div>
+        <div class="panel-body">
+          <div style="height: 180px; margin: 0px; padding: 0px" id="map-canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              Bewoners
+            </h3>
+          </div>
+        </div>
+        <div id="huis-bewoners" class="clearfix">
+          <div id="huis-bewoners-wrap" class="pull-left">
+              <% @bewoners.each do|bewoner| %>
+                  <div class="bewoner">
+                    <%= bewoner.firstname+" "+bewoner.lastname;%>
+                  </div>
+              <% end %>
+          </div>
+          <div id="add-bewoner-modal-trigger" class="pull-right">
+            <i class="fa fa-plus"></i>
+          </div>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Laatste activiteiten</h3>
+        </div>
+        <div class="panel-body">
+        </div>
+        <table class="table">
+          <thead>
+              <tr>
+                <th>
+                  Actie
+                </th>
+                <th>
+                  Tijd
+                </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td>
+                  1
+                </td>
+                <td>
+                  Tijd
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -59,6 +122,10 @@
     }
 
     $(document).ready(function() {
+        $("#add-bewoner-modal-trigger").css("height",$("#huis-bewoners-wrap").height()).css("line-height",$("#huis-bewoners-wrap").height()+"px");
+        $("#add-bewoner-modal-trigger").click(function(){
+           $("#add-bewoner-modal").modal();
+        });
         setTimeout(function() {
             initialize();
         }, 500);
@@ -68,3 +135,21 @@
         }, 1000);
     });
 </script>
+
+<div class="modal fade" id="add-bewoner-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Toevoegen</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="fa-ul">
+          <li><i class="fa-li fa fa-plus"></i> Gezinslid toevoegen</li>
+          <li><i class="fa-li fa fa-plus"></i> Gebruiker toevoegen</li>
+        </ul>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

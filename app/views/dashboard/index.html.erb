@@ -4,7 +4,8 @@
   <div id="vertical-slider"></div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-
+<div id="switch-hulp-markers"></div>
+<div id="switch-offer-markers"></div>
 <script>
     var map;
 
@@ -21,6 +22,9 @@
             lng = @user.longitude.to_s
         end
     %>
+
+    var hulp_markers = [];
+    var offer_markers = [];
 
     function initialize() {
         var mapOptions = {
@@ -155,23 +159,31 @@
                 '<%= offer.message[0,50]  %><%= link_to '  lees meer...', event_path(offer)%><br />Geplaatst door: <%=  offer.user.firstname %><br /> op: <%=  offer.created_at %> '
                 , false,'Events.png');
         <% elsif offer.offer_type == "offers" %>
-        addMarker(<%= offer.latitude.to_s %>, <%= offer.longitude.to_s; %>, 2, 'Aanbieding: <%= offer.title %>',
+        var m = addMarker(<%= offer.latitude.to_s %>, <%= offer.longitude.to_s; %>, 2, 'Aanbieding: <%= offer.title %>',
                 '<%= offer.message[0,50]  %><%= link_to '  lees meer...', offer_path(offer)%> <br />Geplaatst door: <%=  offer.user.firstname %><br />op: <%=  offer.created_at %> '
                 , false,'Ruilen.png');
+         offer_markers.push(m);
         <% end  end %>
 
         <% User.all.each do |user| %>
             <% if (!user.nil? && !user.sent_messages.nil? && !user.sent_messages.last.nil?) %>
                 <% if current_user.id != user.id %>
-                    addMarker(<%= user.latitude.to_s %>, <%= user.longitude.to_s; %>, 3, 'Hulp!',
+                    var m = addMarker(<%= user.latitude.to_s %>, <%= user.longitude.to_s; %>, 3, 'Hulp!',
                             '<%= user.sent_messages.last.body %> <%= link_to '  lees meer...', message_path, :class => 'btn btn-primary'%><br />Geplaatst door: <%=  user.firstname %><br /> op: <%=  user.created_at %> '
                             , false,'Hulp.png');
+                    hulp_markers.push(m);
                 <% end %>
             <% end %>
         <% end %>
     }
 
     $(document).ready(function () {
+        $("#switch-hulp-markers").click(function(){
+           switch_markers(hulp_markers);
+        });
+        $("#switch-offer-markers").click(function(){
+           switch_markers(offer_markers);
+        });
         $("#vertical-slider").slider({
             orientation: "vertical",
             range: "min",
@@ -186,4 +198,14 @@
             initialize();
         }, 500);
     });
+
+    function switch_markers(arr){
+        for(var i = 0; i < arr.length; i++){
+            if(arr[i].getMap() == null){
+                arr[i].setMap(map);
+            }else{
+                arr[i].setMap(null);
+            }
+        }
+    }
 </script>

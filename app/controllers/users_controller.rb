@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
     end
+    @bewoners = User.find_all_by_adres_and_zipcode(@user.adres,@user.zipcode);
   end
 
   def settings
