@@ -3,7 +3,7 @@ var getTime = 5000,
 
 $(document).ready(function() {
     if($('#received-messages').is('*')) {
-        setTimeout(function(){getMessages()}, getTime);
+//        setTimeout(function(){getMessages()}, getTime);
     }
 
     $(document).on('click', ".answer_message", function(){
