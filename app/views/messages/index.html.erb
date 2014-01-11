@@ -22,6 +22,7 @@
     <div class="row">
   <div id="received-messages">
 <% User.all.each do |user| %>
+
     <% unless user.sent_messages.last.nil? %>
         <% message = user.sent_messages.where(:message_type => 'sms').last %>
             <% unless message.nil? %>
@@ -56,9 +57,11 @@
     <h5 class="page-header" style="color: #FE5214">web hulp</h5>
     <div class="row">
       <div id="received-messages">
-        <% @messages.each do |message| %>
-            <% unless message.sender.nil? && message.nil?  %>
-          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <% @messages.each do |message| %>
+                 <% unless message.nil?  %>
+               <% unless message.sender.nil? %>
+
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                   <div class="panel panel-danger panel_va ">
 
                     <div class="panel-heading">
@@ -80,12 +83,14 @@
                           <div class="btn-group btn-group-ms">
                             <button data-receiver-id-web="<%= message.sender.id %>" type="button" role="button" class="answer_message_web btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
                           </div>
-                      <% end %>
+                           <% end %>
                           <% end %>
-                          <% end %>
+                        <% end %>
+
                     </div>
                   </div>
                 </div>
+            <% end %>
             <% end %>
 
       </div>
