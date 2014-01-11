@@ -28,6 +28,11 @@ gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 
+#pagination gem
+
+gem 'will_paginate', '~> 3.0'
+
+gem 'will_paginate-bootstrap'
 
 gem "bing_translator", "~> 4.0.0"
 
@@ -35,6 +40,8 @@ gem 'bcrypt-ruby', '3.0.1'
 gem 'turbolinks'
 
 gem 'geokit-rails'
+
+
 
 gem 'jquery-rails', '~> 2.3.0'
 

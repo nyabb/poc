@@ -7,7 +7,7 @@ class EventsController < ApplicationController
 
   def index
     @user = current_user
-    @offers = Offer.within((@user.radius.to_f/1000).to_f, :origin => @user ).where(:offer_type =>'events').search(params[:search])
+    @offers = Offer.within((@user.radius.to_f/1000).to_f, :origin => @user ).where(:offer_type =>'events').search(params[:search], params[:page])
   end
 
   def show

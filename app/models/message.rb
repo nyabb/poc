@@ -33,4 +33,15 @@ class Message < ActiveRecord::Base
   def read_message
     self.update(:read => true)
   end
+
+  def self.search(search,page)
+    if search
+      paginate :per_page => 5, :page => page,
+               :conditions => ['message LIKE ? OR title LIKE ?', "%#{search}%", "%#{search}%"],
+               :order => 'name'
+
+    else
+      paginate :per_page => 5, :page => page
+    end
+  end
 end

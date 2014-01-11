@@ -1,7 +1,8 @@
-html,body{
-  height:100%;
-  width:100%;
+html, body {
+  height: 100%;
+  width: 100%;
 }
+
 // import the CSS framework
 @import "bootstrap";
 
@@ -9,11 +10,12 @@ html,body{
 img {
   @extend .img-responsive;
   margin: 0 auto;
-  }
+}
+
 // override for the 'Home' navigation link
 .navbar-brand {
   font-size: inherit;
-  }
+}
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes
@@ -21,34 +23,40 @@ img {
 .column {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
+
 .form {
   @extend .col-md-6;
-  }
+}
+
 .form-centered {
   @extend .col-md-6;
   @extend .text-center;
-  }
+}
+
 .submit {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-lg;
-  }
+}
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
-  background:image-url('bodyBg.png') ;
+  background: image-url('bodyBg.png');
   background-repeat: repeat;
   width: 100%;
-  height:100%;
+  height: 100%;
   padding: 0;
   margin: 0;
-  }
+}
+
 section {
   @extend .row;
   margin-top: 20px;
-  }
+}
+
 .navbar {
   margin-bottom: 0px;
 }
@@ -56,14 +64,12 @@ section {
 @font-face {
   font-family: 'CubanoRegular';
   src: asset-url('assets/cubano-regular-webfont.eot');
-  src: asset-url('assets/cubano-regular-webfont.eot?#iefix') format('embedded-opentype'),
-  asset-url('assets/cubano-regular-webfont.woff') format('woff'),
-  asset-url('assets/cubano-regular-webfont.ttf') format('truetype'),
-  asset-url('assets/cubano-regular-webfont.svg#CubanoRegular') format('svg');
+  src: asset-url('assets/cubano-regular-webfont.eot?#iefix') format('embedded-opentype'), asset-url('assets/cubano-regular-webfont.woff') format('woff'), asset-url('assets/cubano-regular-webfont.ttf') format('truetype'), asset-url('assets/cubano-regular-webfont.svg#CubanoRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 
 }
+
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: CubanoRegular !important;
 }
@@ -72,86 +78,77 @@ h1 {
   color: #FE5214;
 }
 
-.row .page-header
-{
+.row .page-header {
   padding-bottom: 9px;
   border-bottom: 1px solid #FE5214;
   background: none;
 }
- .alert
- {
-   position: absolute;
-   text-align: center;
-   top: 50px;
-   width: 100%;
- }
+
+.alert {
+  position: absolute;
+  text-align: center;
+  top: 50px;
+  width: 100%;
+}
 
 .navbar-collapse.in {
   overflow-y: auto;
 }
-.dropdown-menu
-{
+
+.dropdown-menu {
   padding: 0px;
 }
 
-.dropdown-menu li
-{
+.dropdown-menu li {
   background-color: #d40000;;
 }
-.dropdown-menu li:hover, .dropdown.open
-{
-background-color: #c90202;
-}
-.divider
-{
+
+.dropdown-menu li:hover, .dropdown.open {
   background-color: #c90202;
 }
 
+.divider {
+  background-color: #c90202;
+}
 
-html{
+html {
 
-  .gritter-item{
-    &.gritter-css3{
-      background-image: -webkit-gradient(
-          linear,
-          left top,
-          left bottom,
-          color-stop(0, rgba(37, 37, 37,0.7)),
-          color-stop(1, rgba(5, 5, 5,0.7))
-      );
-      background-image: -o-linear-gradient(bottom, rgba(37, 37, 37,0.7) 0%, rgba(5, 5, 5,0.7) 100%);
-      background-image: -moz-linear-gradient(bottom, rgba(37, 37, 37,0.7) 0%, rgba(5, 5, 5,0.7) 100%);
-      background-image: -webkit-linear-gradient(bottom, rgba(37, 37, 37,0.7) 0%, rgba(5, 5, 5,0.7) 100%);
-      background-image: -ms-linear-gradient(bottom, rgba(37, 37, 37,0.7) 0%, rgba(5, 5, 5,0.7) 100%);
-      background-image: linear-gradient(to bottom, rgba(37, 37, 37,0.7) 0%, rgba(5, 5, 5,0.7) 100%);
+  .gritter-item {
+    &.gritter-css3 {
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(37, 37, 37, 0.7)), color-stop(1, rgba(5, 5, 5, 0.7)));
+      background-image: -o-linear-gradient(bottom, rgba(37, 37, 37, 0.7) 0%, rgba(5, 5, 5, 0.7) 100%);
+      background-image: -moz-linear-gradient(bottom, rgba(37, 37, 37, 0.7) 0%, rgba(5, 5, 5, 0.7) 100%);
+      background-image: -webkit-linear-gradient(bottom, rgba(37, 37, 37, 0.7) 0%, rgba(5, 5, 5, 0.7) 100%);
+      background-image: -ms-linear-gradient(bottom, rgba(37, 37, 37, 0.7) 0%, rgba(5, 5, 5, 0.7) 100%);
+      background-image: linear-gradient(to bottom, rgba(37, 37, 37, 0.7) 0%, rgba(5, 5, 5, 0.7) 100%);
       -webkit-border-radius: 3px;
       -moz-border-radius: 3px;
       border-radius: 3px;
       border: 1px solid #000000;
-      -moz-box-shadow: inset 0px 1px 0px rgba(100,100,100,0.7);
-      -webkit-box-shadow: inset 0px 1px 0px rgba(100,100,100,0.7);
-      box-shadow: inset 0px 1px 0px rgba(100,100,100,0.7);
-      &:hover{
+      -moz-box-shadow: inset 0px 1px 0px rgba(100, 100, 100, 0.7);
+      -webkit-box-shadow: inset 0px 1px 0px rgba(100, 100, 100, 0.7);
+      box-shadow: inset 0px 1px 0px rgba(100, 100, 100, 0.7);
+      &:hover {
         border: 1px solid #000000;
         padding: 12px 11px 16px 11px;
       }
-      .gritter-close{
+      .gritter-close {
         background: none;
-        text-align:center;
-        line-height:30px;
-        font-size:14px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 14px;
         right: 5px;
         left: auto;
-        &:before{
+        &:before {
           content: "\2716";
         }
       }
     }
-    a{
-      display:block;
+    a {
+      display: block;
       color: #4cbfd2;
-      margin-top:4px;
-      margin-bottom:-2px;
+      margin-top: 4px;
+      margin-bottom: -2px;
     }
   }
 }
@@ -173,4 +170,86 @@ h1, h2, h3 {
   position: absolute;
   top: 70px;
   right: 82px;
+}
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px
+}
+
+.pagination>li {
+  display: inline
+}
+
+.pagination>li>a, .pagination>li>span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.428571429;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd
+}
+
+.pagination>li:first-child>a, .pagination>li:first-child>span {
+  margin-left: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px
+}
+
+.pagination>li:last-child>a, .pagination>li:last-child>span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px
+}
+
+.pagination>li>a:hover, .pagination>li>span:hover, .pagination>li>a:focus, .pagination>li>span:focus {
+  background-color: #eee
+}
+
+.pagination>.active>a, .pagination>.active>span, .pagination>.active>a:hover, .pagination>.active>span:hover, .pagination>.active>a:focus, .pagination>.active>span:focus {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: #428bca;
+  border-color: #428bca
+}
+
+.pagination>.disabled>span, .pagination>.disabled>span:hover, .pagination>.disabled>span:focus, .pagination>.disabled>a, .pagination>.disabled>a:hover, .pagination>.disabled>a:focus {
+  color: #999;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd
+}
+
+.pagination-lg>li>a, .pagination-lg>li>span {
+  padding: 10px 16px;
+  font-size: 18px
+}
+
+.pagination-lg>li:first-child>a, .pagination-lg>li:first-child>span {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px
+}
+
+.pagination-lg>li:last-child>a, .pagination-lg>li:last-child>span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px
+}
+
+.pagination-sm>li>a, .pagination-sm>li>span {
+  padding: 5px 10px;
+  font-size: 12px
+}
+
+.pagination-sm>li:first-child>a, .pagination-sm>li:first-child>span {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px
+}
+
+.pagination-sm>li:last-child>a, .pagination-sm>li:last-child>span {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px
 }
