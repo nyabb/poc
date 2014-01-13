@@ -6,6 +6,8 @@ Poc::Application.routes.draw do
   get "events/new"
   root "pages#index"
 
+
+  get "page/getusers"   => "pages#getUsers"
   get "messages"        => "messages#index", as: 'message'
   get "messages/reload" => "messages#indexer"
   get "messages/reload/:id" => "messages#indexerid"

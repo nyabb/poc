@@ -1,37 +1,145 @@
-<header id="header">
-  <div class="container">
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+<div class="container">
     <div class="row">
-      <div class="col-md-1"></div>
-      <div class="col-md-3">
-        <div id="login-wrap">
-          <%= link_to("auth/facebook", :class=> 'btn', :id => 'facebook-button') do %>
-              <i class="fa fa-facebook"></i>
-              Sign up with
-              <strong>Facebook</strong>
-          <% end %>
-          <%= form_for(:session, url:sessions_path, :html => {:role => 'form', :id => 'login-form'}) do |f| %>
-              <div class="form-group">
-                <label class="control-label" for="email">E-mail adres</label>
-                <%= f.text_field :email, :class => 'form-control', :id => 'email', :placeholder => 'E-mailadres'; %>
+      <div class="col-md-12 col-xs-12">
+        <div id="presentation">
+          <div class="row">
+            <div class="col-md-8">
+              Slogan
+            </div>
+            <div class="col-md-4">
+              <div id="login-wrap">
+                <%= link_to("auth/facebook", :class=> 'btn', :id => 'facebook-button') do %>
+                    <i class="fa fa-facebook"></i>
+                    Log in met
+                    <strong>Facebook</strong>
+                <% end %>
+                <%= form_for(:session, url:sessions_path, :html => {:role => 'form', :id => 'login-form'}) do |f| %>
+                    <div class="form-group">
+                      <label class="control-label" for="email">E-mail adres</label>
+                      <%= f.text_field :email, :class => 'form-control', :id => 'email', :placeholder => 'E-mailadres'; %>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="wachtwoord">wachtwoord</label>
+                      <%= f.password_field :password, :class => 'form-control', :id => 'wachtwoord', :placeholder => 'Wachtwoord'; %>
+                    </div>
+                    <div class="checkbox">
+                      <label>
+                        <%= f.check_box :remember_me; %>
+                        Onthoud mij
+                      </label>
+                    </div>
+                    <button type="submit" class="btn" id="login-button">Login</button>
+                <% end %>
               </div>
-              <div class="form-group">
-                <label class="control-label" for="wachtwoord">wachtwoord</label>
-                <%= f.password_field :password, :class => 'form-control', :id => 'wachtwoord', :placeholder => 'Wachtwoord'; %>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <%= f.check_box :remember_me; %>
-                  Onthoud mij
-                </label>
-              </div>
-              <button type="submit" class="btn" id="login-button">Login</button>
-          <% end %>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
         </div>
-
-      </div>
-      <div class="col-md-8">
-
       </div>
     </div>
   </div>
-</header>
+<section id="app-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="page-header">
+            Wat is InDeBuurt?
+          </h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <p>Bacon ipsum dolor sit amet pig ham tongue ribeye cow, t-bone meatloaf pork chop tri-tip andouille meatball kielbasa leberkas boudin corned beef. Tri-tip kielbasa t-bone capicola ham, pork belly ham hock landjaeger chuck drumstick shank. Corned beef bresaola shankle shank rump ham frankfurter sirloin venison tenderloin ham hock ground round boudin bacon. Ground round biltong salami brisket, short ribs ribeye shank frankfurter meatball pork sirloin corned beef swine pork chop.</p>
+        </div>
+      <div class="col-md-4">
+        <span id="personen-counter">
+          Al <%= @count_user; %> gebruikers gingen je voor
+        </span>
+        <p>
+          Vul hieronder je postcode in om de gebruikers in je buurt te bekijken.
+        </p>
+        <div class="input-group">
+          <input type="text" class="form-control" id="postcode-filter">
+            <span class="input-group-btn">
+                <button class="btn btn-default" id="postcode-button" type="button">
+                  <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div><!-- /input-group -->
+        <span id="postcode-users"></span>
+      </div>
+    </div>
+</section>
+<section id="map">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div id="map-canvas"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <script>
+    var map;
+    $(document).ready(function(){
+       $("#postcode-button").click(function(){
+           var postcode = $("#postcode-filter").val();
+           postcode = postcode.toUpperCase();
+
+           var reg = new RegExp(/([0-9]){4}\s{1}([A-Z]){2}/)
+           if (reg.exec(postcode) == null)
+           {
+               $.gritter.add({
+                   // (string | mandatory) the heading of the notification
+                   title: 'Fout',
+                   // (string | mandatory) the text inside the notification
+                   text: 'Vul alstublieft een juiste postcode in'
+               });
+               return;
+           }
+           else
+           {
+               $.ajax(
+                       {
+                           type: 'GET',
+                           url: "/page/getusers",
+                           data: {postcode:postcode},
+                           dataType: 'json',
+                           success: function(data)
+                           {
+                               $("#map-canvas").addClass("open");
+                               $("#postcode-users").html('Er zijn '+data.length+' buurtgenoten gevonden');
+                               console.log(data);
+                               var mapOptions = {
+                                   zoom: 18,
+                                   mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                   disableDefaultUI: true,
+                                   center: new google.maps.LatLng(52,6)
+                               };
+
+                               map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                               var bound = new google.maps.LatLngBounds();
+                               $.each(data, function(i, item) {
+                                   var marker;
+                                   marker = new google.maps.Marker({
+                                       position: new google.maps.LatLng(item.latitude,item.longitude),
+                                       map: map,
+                                       draggable: true
+                                   });
+                                   bound.extend(marker.getPosition());
+                               });
+                               map.fitBounds(bound);
+
+                                   var pos = $('#map-canvas').offset();
+                                   $('body').animate({ scrollTop: pos.top });
+                                   e.preventDefault();
+
+                           }
+                       },"json");
+           }
+       });
+    });
+  </script>

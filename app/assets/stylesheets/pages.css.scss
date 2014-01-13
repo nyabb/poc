@@ -4,18 +4,21 @@
 
 
 
-#header{
-  height: 100%;
+#presentation{
+  height: 400px;
   background: image-url('head.png');
   background-size: 100%;
+  margin-top:80px;
+  padding:20px;
 }
+
 #login-wrap{
   background: rgba(255,255,255,0.4);
   -webkit-border-radius: 9px;
   -moz-border-radius: 9px;
   border-radius: 9px;
   padding:20px;
-  margin-top:80px;
+  margin-top:29px;
   font-family: helvetica;
 }
 
@@ -38,4 +41,32 @@
   width: 100%;
   color: #ffffff;
   border:none;
+}
+
+#app-info{
+  height:200px;
+  margin:0 0 50px 0;
+  .page-header{
+    border-bottom: 1px solid #d40000;
+  }
+  p{
+    font-family: Helvetica;
+    font-weight:600;
+    font-size: 14px;
+  }
+}
+
+#personen-counter{
+  font-size:16px;
+}
+
+#postcode-button{
+  background: #d40000;
+  border: 1px solid #8c0202;
+  color: #ffffff;
+  text-shadow:  0 -1px 0 #8c0202;
+}
+
+#map-canvas.open{
+  height:320px;
 }
