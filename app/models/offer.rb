@@ -13,11 +13,10 @@ class Offer < ActiveRecord::Base
   def self.search(search,page)
     if search
       paginate :per_page => 5, :page => page,
-               :conditions => ['message LIKE ? OR title LIKE ?', "%#{search}%", "%#{search}%"],
-               :order => 'name'
-
+               :conditions => ['message LIKE ? OR title LIKE ?', "%#{search}%", "%#{search}%"]
     else
       paginate :per_page => 5, :page => page
     end
   end
+
 end

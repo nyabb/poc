@@ -36,8 +36,9 @@
         </p>
 
         <br/>
-        <h3>Reacties <small>(<%= @offer.reactions.count.to_s %>)</small></h3>
-        <% @offer.reactions.each do  |reaction| %>
+        <h3>Reacties <small>(<%= @reactions.count.to_s %>)</small></h3>
+        <%= will_paginate @reactions if @reactions.respond_to? :total_pages%>
+        <% @reactions.each do  |reaction| %>
 
             <div class="media">
               <div class="well well-mini">

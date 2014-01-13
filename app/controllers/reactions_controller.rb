@@ -1,18 +1,19 @@
 class ReactionsController < ApplicationController
 
-  before_filter :secure_page
+
 
   def create
     @user = current_user
+    @reactions = Reaction.all
     if @user.present?
       @reaction = Reaction.new(reaction_params)
       @reaction.userId = current_user.id
       @reaction.save
-      flash[:correct] = 'Reactie is geplaatst!'
-      redirect_to @reaction.offer
-    else
-      redirect_to offer_url
-    end
+
+      flash[:notice] = 'Reactie is geplaatst!'
+      redirect_to cookies[:lastpage]
+      end
+
   end
 
   def new

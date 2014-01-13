@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
   <% unless @current_user.received_messages.reverse[0].nil? %>
     setId(<%= @current_user.received_messages.reverse[0].id %>);
@@ -17,10 +18,53 @@
 
   </div>
   <div class="col-md-9">
+    <h5 class="page-header" style="color: #FE5214">web hulp</h5>
+    <%= will_paginate @messages %>
+    <div class="row">
+      <div id="received-messages">
+        <% @messages.each do |message| %>
+            <% unless message.nil?  %>
+                <% unless message.sender.nil? %>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                      <div class="panel panel-danger panel_va ">
+
+                        <div class="panel-heading">
+                          <h5><%= message.sender.firstname %> stuurde op <%= message.created_at %></h5>
+                        </div>
+                        <div class="panel-body">
+                          <p><%= message.body %></p>
+
+                          <% if message.read%>
+                              <div class="btn-group btn-group-ms">
+                                <button class="btn btn-primary disabled" type="button" role="button">Geholpen<i class="fa fa-check"></i></button>
+                              </div>
+                          <% else if message.from_user == current_user.id%>
+
+                              <% else %>
+                                  <%= text_area_tag(message.id, '', :placeholder => 'Stuur wat terug!', :class => 'form-control') %>
+
+                                  <br />
+                                  <div class="btn-group btn-group-ms">
+                                    <button data-receiver-id-web="<%= message.sender.id %>" type="button" role="button" class="answer_message_web btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
+                                  </div>
+                              <% end %>
+                          <% end %>
+                <% end %>
+
+                </div>
+                </div>
+                </div>
+            <% end %>
+        <% end %>
+
+      </div>
+    </div>
 
     <h5 class="page-header" style="color: #FE5214">telefonische hulp</h5>
     <div class="row">
   <div id="received-messages">
+
 <% User.all.each do |user| %>
 
     <% unless user.sent_messages.last.nil? %>
@@ -54,47 +98,7 @@
 <% end %>
   </div>
  </div>
-    <h5 class="page-header" style="color: #FE5214">web hulp</h5>
-    <div class="row">
-      <div id="received-messages">
-            <% @messages.each do |message| %>
-                 <% unless message.nil?  %>
-               <% unless message.sender.nil? %>
 
-                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                  <div class="panel panel-danger panel_va ">
-
-                    <div class="panel-heading">
-                      <h5><%= message.sender.firstname %> stuurde op <%= message.created_at %></h5>
-                    </div>
-                    <div class="panel-body">
-                      <p><%= message.body %></p>
-
-                      <% if message.read%>
-                          <div class="btn-group btn-group-ms">
-                            <button class="btn btn-primary disabled" type="button" role="button">Geholpen<i class="fa fa-check"></i></button>
-                          </div>
-                      <% else if message.from_user == current_user.id%>
-
-                      <% else %>
-                          <%= text_area_tag(message.id, '', :placeholder => 'Stuur wat terug!', :class => 'form-control') %>
-
-                              <br />
-                          <div class="btn-group btn-group-ms">
-                            <button data-receiver-id-web="<%= message.sender.id %>" type="button" role="button" class="answer_message_web btn btn-success">Reageren <i class="fa fa-envelope"></i></button>
-                          </div>
-                           <% end %>
-                          <% end %>
-                        <% end %>
-
-                    </div>
-                  </div>
-                </div>
-            <% end %>
-            <% end %>
-
-      </div>
-      </div>
 
     </div>
   <div class="col-md-3">

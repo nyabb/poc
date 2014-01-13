@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   def show
     @user = current_user
     @offer = Offer.find(params[:id],:conditions =>["offer_type = ?", "events" ])
-
+    @reactions = @offer.reactions.will_paginate(params[:page]).order("created_at DESC")
   end
   def create
     @offer = Offer.new(offer_params)
