@@ -3,7 +3,7 @@
 <div id="map-controls">
   <div id="vertical-slider"></div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initialize"></script>
 <div id="switch-hulp-markers" class="switch-marker"></div>
 <div id="switch-offer-markers" class="switch-marker"></div>
 <script>
@@ -196,10 +196,27 @@
                 map.setZoom(ui.value);
             }
         });
-        setTimeout(function () {
-            initialize();
-        }, 500);
     });
+
+    var hash = window.location.href.substring(window.location.href.indexOf('#'));
+
+    if(hash == '#demo') {
+        setTimeout(function () {
+            $("#starter").joyride({
+                'autoStart' : true,
+                'modal': true,
+                'expose': true,
+                'tipLocation': 'bottom',
+                'nubPosition': 'auto',
+                'scrollSpeed': 300,
+                'timer': 3000,
+                'startTimerOnClick': true,
+                'nextButton': true,
+                'tipAnimation': 'fade',
+                'tipAnimationFadeSpeed': 300
+            });
+        }, 500);
+    }
 
     function switch_markers(arr){
         for(var i = 0; i < arr.length; i++){
@@ -210,5 +227,51 @@
             }
         }
     }
-
 </script>
+
+<ol id="starter" style="display: none;">
+  <li data-id="home" class="info-style">
+    <h1>Home pagina</h1>
+    <p>Door op de home-pagine knop te klikken worden alle items binnen je radius weergeven.</p>
+  </li>
+
+  <li data-id="ruilen" class="info-style">
+    <h1>Ruil pagina</h1>
+    <p>De pagina ruilen bevat allerlei items die worden aangeboden. Deze items zijn allemaal te vinden binnen u gekozen radius!</p>
+  </li>
+
+  <li data-id="events" class="info-style">
+    <h1>Evenementen</h1>
+    <p>U kunt zich aanmelden voor evenement, of er zelf een houden!</p>
+  </li>
+
+  <li data-id="hulp" class="info-style">
+    <h1>Hulp</h1>
+    <p>Als u hulp nodig heeft van de buurt, dan kan u hier een oproep plaatsen. Ook kan er worden terug gereageerd.</p>
+  </li>
+
+  <li data-id="profiel" class="info-style">
+    <h1>Profiel</h1>
+    <p>Op deze pagina is je profiel te vinden. Ook is er een log te vinden van je activiteiten. Als u buren heeft die nog moeten worden aangemeld, dan kan dat hier ook!</p>
+  </li>
+
+  <li data-id="account" class="small info-style">
+    <h1>Mijn account</h1>
+    <p>Binnen deze tabs kunt u afmelden of uw instellingen bekijken. Kom je er helemaal niet meer uit? Geen nood, open dan de handleiding.</p>
+  </li>
+
+  <li data-id="settings" class="small info-style">
+    <h1>Instellingen</h1>
+    <p>Hier kunt u uw instellingen beheren! Denk aan uw persoons gegevens of uw locatie & radius.</p>
+  </li>
+
+  <li data-id="handleiding-button" class="small info-style">
+    <h1>Handleiding</h1>
+    <p>Komt u er niet helemaal uit? Klik dan op de handleiding</p>
+  </li>
+
+  <li data-id="logout" class="small info-style">
+    <h1>Uitloggen</h1>
+    <p>Klaar voor nu? Klik dan op loguit om uit te loggen!</p>
+  </li>
+</ol>
