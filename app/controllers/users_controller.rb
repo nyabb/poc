@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def profile
     @messages = Message.all.where(:from_user => current_user.id, :message_type => 'web')
+    @web_reactions = Message.all.where(:to_user => current_user.id, :message_type => 'reactions')
     if params[:id].nil?
       @user = current_user
     else

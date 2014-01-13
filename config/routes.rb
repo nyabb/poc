@@ -13,6 +13,7 @@ Poc::Application.routes.draw do
   get "messages/reload/:id" => "messages#indexerid"
   get "messages/send/:message_id/:message" => "messages#sender"
   post "messages/create" => "messages#create"
+  get "messages/react_web/:receiver_id/:body/:message_id" => "messages#react_web"
 
   get "settings" => "users#settings", as: 'settings'
   get "settings/location" => "users#location",   as: 'user_location'

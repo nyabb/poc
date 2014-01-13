@@ -21,8 +21,9 @@
         <button type="submit" class="btn btn-warning" id="zoek_button">Zoeken</button>
       </form>
     </div>
-
+    <%= will_paginate @offers %>
     <div class="row">
+
       <% @offers.each do |offer| %>
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
             <div class="panel panel-danger panel_va ">
@@ -60,6 +61,8 @@
             </div>
           </div>
       <% end %>
+
+
     </div>
   </div>
   <div class="col-md-3">
