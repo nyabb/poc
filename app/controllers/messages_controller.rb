@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     index_messages
     @current_user = current_user
     @messages = Message.getwebmessages
-    @messages = @messages.paginate(:page => params[:page], :per_page => 2)
+    @messages = @messages.paginate(:per_page => 2, :page => params[:page])
     @web_reactions = Message.getwebreactions
   end
 
