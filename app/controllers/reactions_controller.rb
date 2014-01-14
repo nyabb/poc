@@ -1,7 +1,4 @@
 class ReactionsController < ApplicationController
-
-
-
   def create
     @user = current_user
     @reactions = Reaction.all
@@ -12,7 +9,7 @@ class ReactionsController < ApplicationController
 
       flash[:notice] = 'Reactie is geplaatst!'
       redirect_to cookies[:lastpage]
-      end
+    end
 
   end
 

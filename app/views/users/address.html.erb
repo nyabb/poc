@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 col-xs-12">
-      <%= form_for(@user, :html =>{:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
+      <%= form_for(@user, :html => {:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
           <div class="widget register-widget">
             <h4 class="page-header text-center">
               Voer alstublieft uw aanvullende gegevens in voor u verder gaat
@@ -12,13 +12,13 @@
               <label class="control-label" for="date_of_birth">
                 Geboortedatum*:
               </label>
-              <%= f.text_field :date_of_birth, :class => 'form-control required datepicker', :id=>'date_of_birth', 'data_nicename'=> 'geboortedatum'; %>
+              <%= f.text_field :date_of_birth, :class => 'form-control required datepicker', :id => 'date_of_birth', 'data_nicename' => 'geboortedatum'; %>
             </div>
             <div class="form-group">
               <label class="control-label" for="phone">
                 Telefoonnummer:
               </label>
-              <%= f.text_field :phone, :class => 'form-control', :id=>'phone', 'data_nicename'=> 'telefoonnummer'; %>
+              <%= f.text_field :phone, :class => 'form-control', :id => 'phone', 'data_nicename' => 'telefoonnummer'; %>
             </div>
             <div class="form-group">
               <label class="control-label" for="mobile_phone">
@@ -30,19 +30,19 @@
               <label class="control-label" for="address">
                 Adres*:
               </label>
-              <%= f.text_field :adres, :class => 'form-control required', :id=>'adres', 'data_nicename' => 'adres'; %>
+              <%= f.text_field :adres, :class => 'form-control required', :id => 'adres', 'data_nicename' => 'adres'; %>
             </div>
             <div class="form-group">
               <label class="control-label" for="zipcode">
                 Postcode*:
               </label>
-              <%= f.text_field :zipcode, :class => 'form-control required', :id=>'zipcode', 'data_nicename' => 'postcode'; %>
+              <%= f.text_field :zipcode, :class => 'form-control required', :id => 'zipcode', 'data_nicename' => 'postcode'; %>
             </div>
             <div class="form-group">
               <label class="control-label" for="place">
                 Plaats*:
               </label>
-              <%= f.text_field :place, :class => 'form-control required', :id=>'place', 'data_nicename' => 'plaats'; %>
+              <%= f.text_field :place, :class => 'form-control required', :id => 'place', 'data_nicename' => 'plaats'; %>
             </div>
             <div class="form-group">
               <%= f.submit "Registreeer", :class => "btn btn-block btn-info" %>

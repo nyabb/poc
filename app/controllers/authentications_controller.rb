@@ -18,16 +18,16 @@ class AuthenticationsController < ApplicationController
         current_user.add_provider(auth);
       else
         #Find user, add provider
-        if(@user = User.find_by_email(auth['info']['email']))
+        if (@user = User.find_by_email(auth['info']['email']))
           @user.add_provider(auth);
           session[:user_id] = @user.id;
         else
           #Create User, add provider
           require 'securerandom'
           pass = SecureRandom.hex();
-          @user = User.create(:firstname => auth['info']['first_name'],:lastname => auth['info']['last_name'],:email => auth['info']['email'],:password => pass, :password_confirmation => pass);
+          @user = User.create(:firstname => auth['info']['first_name'], :lastname => auth['info']['last_name'], :email => auth['info']['email'], :password => pass, :password_confirmation => pass);
           if @user.save
-            Emailer.registration_from_oauth(@user,pass).deliver!;
+            Emailer.registration_from_oauth(@user, pass).deliver!;
             @user.add_provider(auth);
             session[:user_id] = @user.id;
           end

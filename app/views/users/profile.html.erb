@@ -12,10 +12,15 @@
         </div>
         <div class="panel-body">
           <p>Naam: <%= "#{@user.firstname} #{@user.lastname}" %></p>
+
           <p>Plaats: <%= @user.place %></p>
+
           <p>Adres: <%= @user.adres %></p>
+
           <p>Postcode: <%= @user.zipcode %></p>
+
           <p>Telefoon: <%= @user.phone %></p>
+
           <p>Mobiel: <%= @user.mobile_phone %></p>
         </div>
       </div>
@@ -33,25 +38,25 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-xs-12">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              Bewoners
-            </h3>
-          </div>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Bewoners
+          </h3>
         </div>
-        <div id="huis-bewoners" class="clearfix">
-          <div id="huis-bewoners-wrap" class="pull-left">
-              <% @bewoners.each do|bewoner| %>
-                  <div class="bewoner">
-                    <%= bewoner.firstname+" "+bewoner.lastname;%>
-                  </div>
-              <% end %>
-          </div>
-          <div id="add-bewoner-modal-trigger" class="pull-right">
-            <i class="fa fa-plus"></i>
-          </div>
+      </div>
+      <div id="huis-bewoners" class="clearfix">
+        <div id="huis-bewoners-wrap" class="pull-left">
+          <% @bewoners.each do |bewoner| %>
+              <div class="bewoner">
+                <%= bewoner.firstname+" "+bewoner.lastname; %>
+              </div>
+          <% end %>
         </div>
+        <div id="add-bewoner-modal-trigger" class="pull-right">
+          <i class="fa fa-plus"></i>
+        </div>
+      </div>
 
     </div>
     <div class="col-md-6 col-xs-12">
@@ -63,24 +68,24 @@
         </div>
         <table class="table">
           <thead>
-              <tr>
-                <th>
-                  Actie
-                </th>
-                <th>
-                  Tijd
-                </th>
-              </tr>
+          <tr>
+            <th>
+              Actie
+            </th>
+            <th>
+              Tijd
+            </th>
+          </tr>
           </thead>
           <tbody>
-              <tr>
-                <td>
-                  1
-                </td>
-                <td>
-                  Tijd
-                </td>
-              </tr>
+          <tr>
+            <td>
+              1
+            </td>
+            <td>
+              Tijd
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -93,15 +98,15 @@
       <h3 class="panel-title">gevraagde hulp <%= @user.lastname %></h3>
     </div>
     <div class="panel-body">
-      <% @messages.each do  |message|%>
-      <p>Bericht: <%= message.body %></p>
+      <% @messages.each do |message| %>
+          <p>Bericht: <%= message.body %></p>
           <% @web_reactions.each do |reactions| %>
-            <% if reactions.reactions_to == message.id %>
-              <p>Reactie van <%= reactions.sender.firstname %> : <%= reactions.body %></p>
-             <% else %>
+              <% if reactions.reactions_to == message.id %>
+                  <p>Reactie van <%= reactions.sender.firstname %> : <%= reactions.body %></p>
+              <% else %>
               <% end %>
           <% end %>
-        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
@@ -109,7 +114,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
     var map,
-        marker;
+            marker;
 
     function setCurrentLocation() {
         addLocation(<%= @user.latitude.to_s %>, <%= @user.longitude.to_s %>);
@@ -139,16 +144,16 @@
         return marker;
     }
 
-    $(document).ready(function() {
-        $("#add-bewoner-modal-trigger").css("height",$("#huis-bewoners-wrap").height()).css("line-height",$("#huis-bewoners-wrap").height()+"px");
-        $("#add-bewoner-modal-trigger").click(function(){
-           $("#add-bewoner-modal").modal();
+    $(document).ready(function () {
+        $("#add-bewoner-modal-trigger").css("height", $("#huis-bewoners-wrap").height()).css("line-height", $("#huis-bewoners-wrap").height() + "px");
+        $("#add-bewoner-modal-trigger").click(function () {
+            $("#add-bewoner-modal").modal();
         });
-        setTimeout(function() {
+        setTimeout(function () {
             initialize();
         }, 500);
 
-        setTimeout(function() {
+        setTimeout(function () {
             setCurrentLocation();
         }, 1000);
     });
@@ -167,7 +172,9 @@
           <li><i class="fa-li fa fa-plus"></i> Gebruiker toevoegen</li>
         </ul>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 

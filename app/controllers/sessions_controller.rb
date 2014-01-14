@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
   before_action :check_login, :except => ["destroy"]
+
   def new
   end
+
   def create
     user = User.find_by_email(params[:session][:email].downcase);
     if user
@@ -18,18 +20,21 @@ class SessionsController < ApplicationController
         redirect_to root_url
       end
     else
-       flash[:succes] = "Ongelodig email."
-       redirect_to root_url
+      flash[:succes] = "Ongelodig email."
+      redirect_to root_url
     end
   end
+
   def destroy
     session[:user_id] = nil;
     cookies.delete :remember_token;
     redirect_to root_url
   end
+
   def store_return_to
     session[:return_to] = request.url
   end
+
   private
   def check_login
     if signed_in?

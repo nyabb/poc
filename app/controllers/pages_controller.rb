@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_filter :check_login
+
   def index
     @user = current_user;
     @cookie = cookies[:remember_token];

@@ -3,7 +3,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script>
     var map,
-        circle;
+            circle;
 
 
     function initialize() {
@@ -86,30 +86,28 @@
     }
 
     $.ajax(
-    {
-        type: 'GET',
-        url: "/aanbiedingen/reload/",
-        async: true,
-        success: function(data)
-        {
-            addMarkers(data, false);
-            reloadMarkers();
-        }
-    });
+            {
+                type: 'GET',
+                url: "/aanbiedingen/reload/",
+                async: true,
+                success: function (data) {
+                    addMarkers(data, false);
+                    reloadMarkers();
+                }
+            });
 
     function reloadMarkers() {
         $.ajax(
-        {
-            type: 'GET',
-            url: "/aanbiedingen/reload/",
-            async: true,
-            success: function(data)
-            {
-                addMarkers(data, true);
-            }
-        });
+                {
+                    type: 'GET',
+                    url: "/aanbiedingen/reload/",
+                    async: true,
+                    success: function (data) {
+                        addMarkers(data, true);
+                    }
+                });
 
-        setTimeout(function() {
+        setTimeout(function () {
             reloadMarkers();
         }, 5000);
     }

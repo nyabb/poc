@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   before_filter :secure_page
+
   def index
     index_messages;
 
@@ -10,8 +11,8 @@ class DashboardController < ApplicationController
       @users = User.within(params[:radius], :origin => @user);
       @radius = (params[:radius].to_f * 1000);
     else
-       @users = nil;
-       @radius = nil;
+      @users = nil;
+      @radius = nil;
     end
   end
 end

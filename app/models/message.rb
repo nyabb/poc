@@ -14,18 +14,19 @@ class Message < ActiveRecord::Base
   def self.chatfeed(from_user, to_user)
     Message.where(from_user: [from_user, to_user], to_user: [from_user, to_user], message_type: 'chat');
   end
+
   def self.getwebmessages
     messages = []
-    all_messages = Message.all.select("Distinct(from_user)").group(:from_user, :id,:to_user, :body, :message_type, :reactions_to)
+    all_messages = Message.all.select("Distinct(from_user)").group(:from_user, :id, :to_user, :body, :message_type, :reactions_to)
     all_messages.each do |web_message|
-       message = Message.order("created_at DESC").where(:message_type => 'web').find_by_from_user (web_message.from_user)
-       messages << message
-      end
+      message = Message.order("created_at DESC").where(:message_type => 'web').find_by_from_user (web_message.from_user)
+      messages << message
+    end
     messages
   end
 
   def self.getwebreactions
-    messages =  Message.all.where(:message_type => 'reactions', :to_user => @current_user)
+    messages = Message.all.where(:message_type => 'reactions', :to_user => @current_user)
     messages
   end
 

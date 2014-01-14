@@ -1,115 +1,117 @@
 <div class="container">
-    <h1>Instellingen</h1>
-    <div class="row">
-      <div class="col-md-6 col-xs-12">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Gegevens</h3>
-          </div>
-          <div class="panel-body">
-            <%= form_for(current_user, :html =>{:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
-                <div class="widget register-widget">
-                  <div class="form-group">
-                    <label class="control-label" for="firstname">
-                      Voornaam:
-                    </label>
-                    <%= f.text_field :firstname, :class => 'form-control required', :id=>'firstname', 'data_nicename'=> 'voornaam'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="lastname">
-                      Achternaam:
-                    </label>
-                    <%= f.text_field :lastname, :class => 'form-control required', :id=>'lastname', 'data_nicename'=> 'achternaam'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="email">
-                      E-mail adres:
-                    </label>
-                    <%= f.text_field :email, :class => 'form-control required', :id => 'email', 'data_nicename' => 'e-mail adres'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="password">
-                      Wachtwoord:
-                    </label>
-                    <%= f.password_field :password, :class => 'form-control required', :id=>'password', 'data_nicename' => 'Wachtwoord'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="password_confirmation">
-                      Wachtwoord bevestiging*:
-                    </label>
-                    <%= f.password_field :password_confirmation, :class => 'form-control required', :id=>'password_confirmation', 'data_nicename' => 'Wachtwoord'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="country">
-                      Gewenste taal:
-                    </label>
-                    <%= f.collection_select(:country_id,Country.all,:id,:name,{},{:class=>'form-control',:id=>'country'}); %>
-                  </div>
-                  <div class="form-group">
-                    <%= f.submit "Opslaan", :class => "btn btn-block btn-info" %>
-                  </div>
-                </div>
-            <% end %>
-            <div id="form-error-handler"></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-xs-12">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">Adres gegevens</h3>
-          </div>
-          <div class="panel-body">
-            <%= form_for(current_user, :html =>{:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
-                <div class="widget register-widget">
-                  <div class="form-group">
-                    <label class="control-label" for="adres">
-                      Adres:
-                    </label>
-                    <%= f.text_field :adres, :class => 'form-control required', :id=>'adres', 'data_nicename'=> 'adres'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="zipcode">
-                      Postcode:
-                    </label>
-                    <%= f.text_field :zipcode, :class => 'form-control required', :id=>'zipcode', 'data_nicename'=> 'postcode'; %>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label" for="place">
-                      Plaats:
-                    </label>
-                    <%= f.text_field :place, :class => 'form-control required', :id => 'place', 'data_nicename' => 'plaats'; %>
-                  </div>
-                  <div class="form-group">
-                    <%= f.submit "Opslaan", :class => "btn btn-block btn-info" %>
-                  </div>
-                </div>
-            <% end %>
-            <div id="form-error-handler"></div>
-          </div>
-        </div>
-        <div class="panel panel-primary" style="margin-top:20px;">
-          <div class="panel-heading">
-            <h3 class="panel-title">Locatie</h3>
-          </div>
-          <div class="panel-body">
-            <a href="<%= user_location_url;%>" class="btn btn-primary">
-              Selecteer locatie
-            </a>
-          </div>
-        </div>
+  <h1>Instellingen</h1>
 
-        <div class="panel panel-danger" style="margin-top:20px;">
-          <div class="panel-heading">
-            <h3 class="panel-title">Afmelden</h3>
-          </div>
-          <div class="panel-body">
-            Als u zich afmeld van de applicatie gaan al uw gegevens verloren! U kan zich wel opnieuw aanmelden, maar al uw ingevoerde data is verwijderd!<br />
-            <a href="#" onclick="confirm('Weet u zeker dat u echt weg wilt? Er is hierna geen weg meer terug!');" class="btn btn-danger">
-              Afmelden
-            </a>
-          </div>
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Gegevens</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_for(current_user, :html => {:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
+              <div class="widget register-widget">
+                <div class="form-group">
+                  <label class="control-label" for="firstname">
+                    Voornaam:
+                  </label>
+                  <%= f.text_field :firstname, :class => 'form-control required', :id => 'firstname', 'data_nicename' => 'voornaam'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="lastname">
+                    Achternaam:
+                  </label>
+                  <%= f.text_field :lastname, :class => 'form-control required', :id => 'lastname', 'data_nicename' => 'achternaam'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="email">
+                    E-mail adres:
+                  </label>
+                  <%= f.text_field :email, :class => 'form-control required', :id => 'email', 'data_nicename' => 'e-mail adres'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="password">
+                    Wachtwoord:
+                  </label>
+                  <%= f.password_field :password, :class => 'form-control required', :id => 'password', 'data_nicename' => 'Wachtwoord'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="password_confirmation">
+                    Wachtwoord bevestiging*:
+                  </label>
+                  <%= f.password_field :password_confirmation, :class => 'form-control required', :id => 'password_confirmation', 'data_nicename' => 'Wachtwoord'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="country">
+                    Gewenste taal:
+                  </label>
+                  <%= f.collection_select(:country_id, Country.all, :id, :name, {}, {:class => 'form-control', :id => 'country'}); %>
+                </div>
+                <div class="form-group">
+                  <%= f.submit "Opslaan", :class => "btn btn-block btn-info" %>
+                </div>
+              </div>
+          <% end %>
+          <div id="form-error-handler"></div>
         </div>
       </div>
     </div>
+    <div class="col-md-6 col-xs-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Adres gegevens</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_for(current_user, :html => {:role => 'form', :onsubmit => 'return validateForm(this)'}) do |f| %>
+              <div class="widget register-widget">
+                <div class="form-group">
+                  <label class="control-label" for="adres">
+                    Adres:
+                  </label>
+                  <%= f.text_field :adres, :class => 'form-control required', :id => 'adres', 'data_nicename' => 'adres'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="zipcode">
+                    Postcode:
+                  </label>
+                  <%= f.text_field :zipcode, :class => 'form-control required', :id => 'zipcode', 'data_nicename' => 'postcode'; %>
+                </div>
+                <div class="form-group">
+                  <label class="control-label" for="place">
+                    Plaats:
+                  </label>
+                  <%= f.text_field :place, :class => 'form-control required', :id => 'place', 'data_nicename' => 'plaats'; %>
+                </div>
+                <div class="form-group">
+                  <%= f.submit "Opslaan", :class => "btn btn-block btn-info" %>
+                </div>
+              </div>
+          <% end %>
+          <div id="form-error-handler"></div>
+        </div>
+      </div>
+      <div class="panel panel-primary" style="margin-top:20px;">
+        <div class="panel-heading">
+          <h3 class="panel-title">Locatie</h3>
+        </div>
+        <div class="panel-body">
+          <a href="<%= user_location_url; %>" class="btn btn-primary">
+            Selecteer locatie
+          </a>
+        </div>
+      </div>
+
+      <div class="panel panel-danger" style="margin-top:20px;">
+        <div class="panel-heading">
+          <h3 class="panel-title">Afmelden</h3>
+        </div>
+        <div class="panel-body">
+          Als u zich afmeld van de applicatie gaan al uw gegevens verloren! U kan zich wel opnieuw aanmelden, maar al uw
+          ingevoerde data is verwijderd!<br/>
+          <a href="#" onclick="confirm('Weet u zeker dat u echt weg wilt? Er is hierna geen weg meer terug!');" class="btn btn-danger">
+            Afmelden
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,52 +1,58 @@
 <div class="container">
-    <div style="margin-left: 20px;">
-        <h1>Selecteer jouw locatie</h1>
-        <p>Door je locatie en radius in te stellen krijg je alleen aanbiedingen binnen deze radius. Dit kan handig zijn als je geen aanbiedingen wil hebben buiten je radius.</p>
-        <button style="position: absolute; top: 80px; right: 105px;" id="save-button" class="btn btn-success pull-right">Locatie opslaan</button>
-    </div>
+  <div style="margin-left: 20px;">
+    <h1>Selecteer jouw locatie</h1>
+
+    <p>Door je locatie en radius in te stellen krijg je alleen aanbiedingen binnen deze radius. Dit kan handig zijn als
+      je geen aanbiedingen wil hebben buiten je radius.</p>
+    <button style="position: absolute; top: 80px; right: 105px;" id="save-button" class="btn btn-success pull-right">Locatie
+      opslaan
+    </button>
+  </div>
 </div>
 
 <script src="http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=initialize"></script>
 <script>
     var map,
-        circle;
+            circle;
 
     function saveLocation() {
         var data = {
-            latitude:   circle.getCenter().lat(),
-            longitude:  circle.getCenter().lng(),
-            radius:     circle.getRadius()
+            latitude: circle.getCenter().lat(),
+            longitude: circle.getCenter().lng(),
+            radius: circle.getRadius()
         };
 
         $.ajax(
-        {
-            type: 'POST',
-            url: "/settings/save_location/",
-            data: data,
-            async: true,
-            success: function(data) {
-                alert('Locatie is succesvol opgeslagen!');
-                window.location.href = "/settings";
-            }
-        });
-    };
+                {
+                    type: 'POST',
+                    url: "/settings/save_location/",
+                    data: data,
+                    async: true,
+                    success: function (data) {
+                        alert('Locatie is succesvol opgeslagen!');
+                        window.location.href = "/settings";
+                    }
+                });
+    }
+    ;
 
     function setCurrentLocation() {
         $.ajax(
-        {
-            type: 'GET',
-            url: "/settings/current_location/",
-            async: true,
-            success: function(data)
-            {
-                addRadius(data.radius, data.latitude, data.longitude)
-            }
-        });
-    };
+                {
+                    type: 'GET',
+                    url: "/settings/current_location/",
+                    async: true,
+                    success: function (data) {
+                        addRadius(data.radius, data.latitude, data.longitude)
+                    }
+                });
+    }
+    ;
 
     function addRadius(radius, lat, long) {
         addCircle(radius, lat, long);
-    };
+    }
+    ;
 
     <%
         if current_user.latitude.nil? || current_user.latitude == ''
@@ -73,7 +79,8 @@
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
         setCurrentLocation();
-    };
+    }
+    ;
 
     function addCircle(radius, lat, long) {
         var circleData = {
@@ -91,9 +98,10 @@
 
         circle.setEditable(true);
         circle.setDraggable(true);
-    };
+    }
+    ;
 
-    $(document).on('click', '#save-button', function() {
+    $(document).on('click', '#save-button', function () {
         saveLocation();
     });
 </script>

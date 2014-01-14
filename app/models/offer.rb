@@ -10,7 +10,7 @@ class Offer < ActiveRecord::Base
   validates :title, presence: true
   validates :message, presence: true
 
-  def self.search(search,page)
+  def self.search(search, page)
     if search
       paginate :per_page => 5, :page => page,
                :conditions => ['message LIKE ? OR title LIKE ?', "%#{search}%", "%#{search}%"]

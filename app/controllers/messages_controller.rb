@@ -25,9 +25,9 @@ class MessagesController < ApplicationController
     else
       flash[:notice] = 'Uw aanvraag is niet gelukt!'
       redirect_to message_url
-
     end
   end
+
   def react_web
     @message = Message.new(message_params)
     @message.from_user = @current_user.id
@@ -46,10 +46,9 @@ class MessagesController < ApplicationController
     else
       flash[:notice] = 'Uw aanvraag is niet gelukt!'
       redirect_to message_url
-
     end
 
-    end
+  end
 
   def indexerid
     index_messages
@@ -85,8 +84,9 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.permit(:from_user, :to_user, :body, :message_type ,:read)
+    params.permit(:from_user, :to_user, :body, :message_type, :read)
   end
+
   def send_message (user, message, receiver)
     require 'net/http'
     uri = 'https://rest.nexmo.com/sms/json?api_key=f1bb3c13&api_secret=ff232359&from=' + user.firstname + '&to=' + receiver.mobile_phone + '&text=' + message

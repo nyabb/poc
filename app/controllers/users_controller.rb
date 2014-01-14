@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     else
       @user = User.find(params[:id])
     end
-    @bewoners = User.find_all_by_adres_and_zipcode(@user.adres,@user.zipcode);
+    @bewoners = User.find_all_by_adres_and_zipcode(@user.adres, @user.zipcode);
   end
 
   def settings
@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 
 
   end
+
   def update
     @user = current_user
     if @user.update_attributes(user_params())
@@ -85,7 +86,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:firstname, :lastname, :password, :password_confirmation, :email,:adres,:zipcode,:place,:date_of_birth,:phone,:mobile_phone,:radius,:country_id) if params[:user]
+    params.require(:user).permit(:firstname, :lastname, :password, :password_confirmation, :email, :adres, :zipcode, :place, :date_of_birth, :phone, :mobile_phone, :radius, :country_id) if params[:user]
   end
 
 end

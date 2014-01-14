@@ -1,32 +1,30 @@
 class OffersController < ApplicationController
-
-
   rescue_from ActiveRecord::RecordNotFound do
     flash[:correct] = 'Aanbieding bestaat niet meer!'
     redirect_to events_all_url
   end
 
   def index
-  @user = current_user
-  @offers = Offer.within((@user.radius.to_f/1000).to_f, :origin => @user ).where(:offer_type =>'offers').search(params[:search], params[:page])
+    @user = current_user
+    @offers = Offer.within((@user.radius.to_f/1000).to_f, :origin => @user).where(:offer_type => 'offers').search(params[:search], params[:page])
   end
 
   def show
-   @user = current_user
-   @offer = Offer.find(params[:id],:conditions =>["offer_type = ?", "offers" ])
-   @reactions = @offer.reactions.will_paginate(params[:page]).order("created_at DESC")
+    @user = current_user
+    @offer = Offer.find(params[:id], :conditions => ["offer_type = ?", "offers"])
+    @reactions = @offer.reactions.will_paginate(params[:page]).order("created_at DESC")
   end
 
   def create
     @offer = Offer.new(offer_params)
-    @offer.user_id =  current_user.id
+    @offer.user_id = current_user.id
 
     if @offer.save
       flash[:notice] = 'Aanbieding is succesvol geplaatst!'
       upload_image(params, @offer)
       redirect_to @offer
     else
-       redirect_to cookies[:lastpage]
+      redirect_to cookies[:lastpage]
     end
   end
 
@@ -44,10 +42,9 @@ class OffersController < ApplicationController
     end
   end
 
-
   private
   def offer_params
-    params.permit(:title, :message, :user_id, :longitude, :offer_type ,:latitude, :fulfilled)
+    params.permit(:title, :message, :user_id, :longitude, :offer_type, :latitude, :fulfilled)
   end
 
   def upload_image(upload, offer)
@@ -66,7 +63,7 @@ class OffersController < ApplicationController
         File.delete(image_root + offer.id.to_s + ".jpeg")
       end
 
-      file_name = upload['datafile'].original_filename  if  (upload['datafile'] !='')
+      file_name = upload['datafile'].original_filename if  (upload['datafile'] !='')
       file = upload['datafile'].read
 
       file_type = file_name.split('.').last
@@ -74,7 +71,7 @@ class OffersController < ApplicationController
 
       new_file_name_with_type = "#{image_root}#{new_name_file}." + file_type
 
-      File.open(new_file_name_with_type, "wb")  do |f|
+      File.open(new_file_name_with_type, "wb") do |f|
         f.write(file)
       end
     end
