@@ -24,15 +24,15 @@ class User < ActiveRecord::Base
     end
   }
 
-  before_update {
-    if self.adres_changed? || self.zipcode_changed? || self.place_changed?
-      Rails.logger.debug 'before update jonge'
-      nl_bounds = Geokit::Geocoders::GoogleGeocoder.geocode('Nederland').suggested_bounds
-      res = Geokit::Geocoders::GoogleGeocoder.geocode(self.adres+' '+self.zipcode+' '+self.place, :bias => nl_bounds)
-      self.latitude = res.lat
-      self.longitude = res.lng
-    end
-  }
+  #before_update {
+  #  if self.adres_changed? || self.zipcode_changed? || self.place_changed?
+  #    Rails.logger.debug 'before update jonge'
+  #    nl_bounds = Geokit::Geocoders::GoogleGeocoder.geocode('Nederland').suggested_bounds
+  #    res = Geokit::Geocoders::GoogleGeocoder.geocode(self.adres+' '+self.zipcode+' '+self.place, :bias => nl_bounds)
+  #    self.latitude = res.lat
+  #    self.longitude = res.lng
+  #  end
+  #}
 
   before_create :create_remember_me_token
 
